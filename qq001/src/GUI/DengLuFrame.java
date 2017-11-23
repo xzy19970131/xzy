@@ -60,6 +60,7 @@ public class DengLuFrame extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		btnNewButton.setForeground(SystemColor.text);
