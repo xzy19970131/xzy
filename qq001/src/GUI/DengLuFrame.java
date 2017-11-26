@@ -2,10 +2,16 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import control.Client;
+import control.Server;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -22,7 +28,10 @@ public class DengLuFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	private Client client;
+	private JTextArea jTextArea;
+	private ServerFrame serverFrame;
+	private Server server;
 	/**
 	 * Launch the application.
 	 */
@@ -56,11 +65,18 @@ public class DengLuFrame extends JFrame {
 		label.setBounds(0, 0, 411, 132);
 		contentPane.add(label);
 		
-		JButton btnNewButton = new JButton("登录");
+		JButton btnNewButton = new JButton("登录");                    //登录界面       点  登录 按钮 
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				client= new Client();
+				client.DengLu();
+				serverFrame = new ServerFrame();
+				jTextArea = serverFrame.getTextArea();
+				server = new Server(jTextArea);
+				server.MuLu();
+				jTextArea.paintComponents(jTextArea.getGraphics());
+				jTextArea.repaint();
 			}
 		});
 		btnNewButton.setForeground(SystemColor.text);
