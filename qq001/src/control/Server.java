@@ -2,11 +2,10 @@ package control;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import javax.swing.JTextArea;
 
 import GUI.ServerFrame;
-
+import control.qqconfig;
 /**
  * @author lenovo
  *
@@ -36,7 +35,7 @@ public class Server {
 	
 	public boolean Open() {                         //打开服务器
 		try {
-			serverSocket = new ServerSocket(6666);
+			serverSocket = new ServerSocket(qqconfig.serverPort);
 			serverFrame.append("服务器已经打开");
 			serverFrame.getParent().paintAll(serverFrame.getParent().getGraphics());
 			return true;

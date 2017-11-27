@@ -7,7 +7,7 @@ public class Client {
 	private Socket socket;
 	public void DengLu() {
 		try {
-			socket = new Socket("localhost",6666);
+			socket = new Socket(qqconfig.serverIP,qqconfig.serverPort);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,5 +1,6 @@
 package jiatupian;
 
+import java.awt.Label;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
@@ -15,7 +16,13 @@ public class gui extends JFrame{
 		setLocationRelativeTo(null);      //居中
 		setLayout(null);
 		
-		j = new JLabel(new ImageIcon(Toolkit.getDefaultToolkit().createImage("tt/shang.png")));
+	//	j = new JLabel(new ImageIcon(Toolkit.getDefaultToolkit().createImage("tt/shang.png")));
+		//j = new JLabel();
+	//	j.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("tt/shang.png")));
+	//	j.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("tt/timg.gif")));
+		//j = new JLabel(new ImageIcon(Toolkit.getDefaultToolkit().getImage("tt/timg.gif")));
+		j = new JLabel();
+		j.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("tt/timg.gif")));
 		j.setBounds(0, 0, 400, 200);
 		this.add(j);
 	}
