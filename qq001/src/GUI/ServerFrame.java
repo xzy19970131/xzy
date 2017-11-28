@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,7 +19,6 @@ import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class ServerFrame extends JFrame {
-
 	private JPanel contentPane;
 	private Server server;
 	private JTextArea textArea;
@@ -71,15 +71,16 @@ public class ServerFrame extends JFrame {
 		textArea.setBounds(0, 0, 214, 198);
 		contentPane.add(textArea);
 		
+		server = new Server(textArea);
+		boolean open=server.Open();	
+		
 		JButton btnNewButton = new JButton("Open");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {        	// 打开服务器
-				server = new Server(textArea);
-				boolean open=server.Open();	
 				if(open) {
 					server.startServe();
+					textArea.append("有用户连接\n");
 				}
-				System.out.println("123456");
 			}
 		});
 		btnNewButton.setBounds(8, 212, 93, 23);

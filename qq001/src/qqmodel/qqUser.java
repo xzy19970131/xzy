@@ -1,9 +1,10 @@
 package qqmodel;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Map;
 
-public class qqUser {
+public class qqUser implements Serializable{
 	private String name;
 	private String sex;
 	private String password;
@@ -13,19 +14,9 @@ public class qqUser {
 	private String qqUser;
 	private Map<String,HashSet<qqUser>> friends;
 	
-	
-	
-	
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
-
-
-
-
 	/**
 	 * @param name the name to set
 	 */
@@ -176,6 +167,27 @@ public class qqUser {
 
 
 
+	public qqUser() {
+		super();
+	}
+	
+	public qqUser(String name, String password) {
+		super();
+		this.name = name;
+		this.password = password;
+	}
+	public qqUser(String name, String sex, String password, String age, String signature, String imagePath,
+			String qqUser, Map<String, HashSet<qqUser>> friends) {
+		super();
+		this.name = name;
+		this.sex = sex;
+		this.password = password;
+		this.age = age;
+		this.signature = signature;
+		this.imagePath = imagePath;
+		this.qqUser = qqUser;
+		this.friends = friends;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
