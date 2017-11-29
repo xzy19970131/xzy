@@ -18,6 +18,7 @@ import qqmodel.qqUser;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JWindow;
 import javax.swing.JCheckBox;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -35,7 +36,7 @@ import java.awt.Toolkit;
 import javax.swing.JComboBox;
 import java.awt.Color;
 
-public class DengLuFrame extends JFrame {
+public class DengLuFrame extends JWindow {
 
 	private JPanel contentPane;
 	private JTextField textField_1;
@@ -68,7 +69,7 @@ public class DengLuFrame extends JFrame {
 	 */
 	public DengLuFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DengLuFrame.class.getResource("/image/QQ.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 297);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

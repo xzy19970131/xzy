@@ -79,7 +79,6 @@ public class ServerFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {        	// 打开服务器
 				if(open) {
 					server.startServe();
-					textArea.append("有用户连接\n");
 				}
 			}
 		});

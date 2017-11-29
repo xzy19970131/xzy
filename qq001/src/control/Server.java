@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 
 import GUI.ServerFrame;
 import control.qqconfig;
+import qqmodel.Message;
 /**
  * @author lenovo
  *
@@ -30,22 +31,25 @@ public class Server {
 		new Thread() {
 			public void run() {
 				while(true)
-			{
+				{
 					try {
 						serverFrame.append("服务器开始服务~\n");
 						JOptionPane.showMessageDialog(serverFrame,"服务器已开始服务","温馨提示",JOptionPane.INFORMATION_MESSAGE);
 						serverFrame.getParent().paintAll(serverFrame.getParent().getGraphics());
-						Socket client = serverSocket.accept();		
+						Socket client = serverSocket.accept();	
+						System.out.println("有用户接入\n");
 						out = new ObjectOutputStream(client.getOutputStream());
 						in = new ObjectInputStream(client.getInputStream());
+						chatclass thischat = new chatclass(out, in);
+						thischat.start();
 						
 						
 						
-					} catch (IOException e) {
+						} catch (IOException e) {
 						JOptionPane.showMessageDialog(serverFrame,"服务器开始失败","温馨提示",JOptionPane.WARNING_MESSAGE);
 						e.printStackTrace();
-					}
-			}
+						}
+				}
 			
 			}
 		}.start();
@@ -72,10 +76,31 @@ public class Server {
 	
 	//内部类
 	//用于和服务器交流的
-	class
-	
-	
-	
-	
+	class chatclass extends Thread{
+		ObjectOutputStream out;
+		ObjectInputStream in;
+		public chatclass(ObjectOutputStream out, ObjectInputStream in) {
+			super();
+			this.out = out;
+			this.in = in;
+		}
+		public void run() {
+			//不断读取客户端的传来的数据
+			while(true) {
+				try {	
+					Message message = null;
+					message = (Message)in.readObject();
+					System.out.println(message);
+					if(message.getType().equals("login"));{}
+				
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		
+		
+	}
 	
 }
