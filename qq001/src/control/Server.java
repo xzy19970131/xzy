@@ -7,10 +7,13 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
+
 
 import GUI.ServerFrame;
 import control.qqconfig;
 import qqmodel.Message;
+import qqmodel.qqUser;
 /**
  * @author lenovo
  *
@@ -27,24 +30,22 @@ public class Server {
 		this.serverFrame = textArea;
 	}
 	public void startServe() {
-		
+		serverFrame.append("服务器开始服务~\n");
+		JOptionPane.showMessageDialog(serverFrame,"服务器已开始服务","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+		serverFrame.getParent().paintAll(serverFrame.getParent().getGraphics());
 		new Thread() {
 			public void run() {
 				while(true)
 				{
 					try {
-						serverFrame.append("服务器开始服务~\n");
-						JOptionPane.showMessageDialog(serverFrame,"服务器已开始服务","温馨提示",JOptionPane.INFORMATION_MESSAGE);
-						serverFrame.getParent().paintAll(serverFrame.getParent().getGraphics());
 						Socket client = serverSocket.accept();	
 						System.out.println("有用户接入\n");
 						out = new ObjectOutputStream(client.getOutputStream());
 						in = new ObjectInputStream(client.getInputStream());
+						
 						chatclass thischat = new chatclass(out, in);
 						thischat.start();
-						
-						
-						
+					
 						} catch (IOException e) {
 						JOptionPane.showMessageDialog(serverFrame,"服务器开始失败","温馨提示",JOptionPane.WARNING_MESSAGE);
 						e.printStackTrace();
@@ -87,18 +88,65 @@ public class Server {
 		public void run() {
 			//不断读取客户端的传来的数据
 			while(true) {
-				try {	
-					Message message = null;
-					message = (Message)in.readObject();
-					System.out.println(message);
-					if(message.getType().equals("login"));{}
-				
-				} catch (Exception e) {
-					e.printStackTrace();
+				try {
+					while(true)//不停的读取客户端发送过来的消息
+					{
+						Message  m=(Message)in.readObject();//当前这个线程接收到这个客户端发送过来的一个Message对象
+						System.out.println(m);
+						if(m.getType().equals("login")) {
+							LoginMessage(m);
+						}else if(m.getType().equals("register")) {
+							RegisterMessage(m);
+						}else if(m.getType().equals("addFriend")) {
+							
+						}else if(m.getType().equals("search")) {
+							
+						}else if(m.getType().equals("update")) {
+							
+						}
+						
+
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 			}
 		}
-
+				//登陆
+		private void LoginMessage(Message  m) {
+			//链接数据库判断用户登陆信息是否正确
+			qqUser loginedUser=Operator.login(m.getFrom().getName(), m.getFrom().getPassword());
+			
+//			if(loginedUser!=null) {
+//			//如果登陆成功，需要更新服务器窗口上显式的用户列表信息
+//			model=new DefaultTableModel(new Object[][] {{loginedUser.getName(),loginedUser.getNickname()}}, tableTitle);
+//			table.setModel(model);
+//			}
+			//当服务器根据传过来的用户名和密码查询完数据库之后，无论登陆成功还失败都要给用户回一个消息(都要封装成MessageBox)
+			Message loginResult=new Message();
+			loginResult.setFrom(loginedUser);
+			loginResult.setType("loginResult");
+			try {
+				out.writeObject(loginResult);
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		private void RegisterMessage(Message m) {   //注册
+			
+			qqUser  willResgisterUser=m.getFrom();
+			Boolean result=Operator.register(willResgisterUser);
+			Message  registerResultMessage=new Message();
+			registerResultMessage.setContent(result.toString());
+			registerResultMessage.setType("registerResult");
+			try {
+				out.writeObject(registerResultMessage);
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 	}

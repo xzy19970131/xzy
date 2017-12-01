@@ -8,11 +8,26 @@ public class qqUser implements Serializable{
 	private String name;
 	private String sex;
 	private String password;
-	private String age;
+	private int  age;
 	private String signature;
 	private String imagePath;
 	private String qqUser;
+	private String nickname;
 	private Map<String,HashSet<qqUser>> friends;
+	
+	/**
+	 * @return the nickname
+	 */
+	public String getNickname() {
+		return nickname;
+	}
+	/**
+	 * @param nickname the nickname to set
+	 */
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	
 	public String getName() {
 		return name;
@@ -70,7 +85,7 @@ public class qqUser implements Serializable{
 	/**
 	 * @return the age
 	 */
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
@@ -80,7 +95,7 @@ public class qqUser implements Serializable{
 	/**
 	 * @param age the age to set
 	 */
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -176,8 +191,10 @@ public class qqUser implements Serializable{
 		this.name = name;
 		this.password = password;
 	}
-	public qqUser(String name, String sex, String password, String age, String signature, String imagePath,
-			String qqUser, Map<String, HashSet<qqUser>> friends) {
+
+	
+	public qqUser(String name, String sex, String password, int age,  String imagePath,
+			String nickname,String signature) {
 		super();
 		this.name = name;
 		this.sex = sex;
@@ -185,8 +202,7 @@ public class qqUser implements Serializable{
 		this.age = age;
 		this.signature = signature;
 		this.imagePath = imagePath;
-		this.qqUser = qqUser;
-		this.friends = friends;
+		this.nickname = nickname;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -194,8 +210,11 @@ public class qqUser implements Serializable{
 	@Override
 	public String toString() {
 		return "qqUser [name=" + name + ", sex=" + sex + ", password=" + password + ", age=" + age + ", signature="
-				+ signature + ", imagePath=" + imagePath + ", qqUser=" + qqUser + ", friends=" + friends + "]";
+				+ signature + ", imagePath=" + imagePath + ", qqUser=" + qqUser + ", nickname=" + nickname + "]";
 	}
+
+	
+	
 	
 	
 }
