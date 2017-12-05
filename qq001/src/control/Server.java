@@ -6,14 +6,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableModel;
 
 import GUI.ServerFrame;
 import control.qqconfig;
 import qqmodel.Message;
 import qqmodel.qqUser;
+
 /**
  * @author lenovo
  *
@@ -23,8 +25,9 @@ public class Server {
 	static ServerSocket serverSocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	
-	
+	private TableModel  model;
+	private Object[] tableTitle=new Object[]{"登陆IP","用户昵称"};
+	private JTable table;
 	public Server(JTextArea textArea) {
 		super();
 		this.serverFrame = textArea;
@@ -118,6 +121,8 @@ public class Server {
 			qqUser loginedUser=Operator.login(m.getFrom().getName(), m.getFrom().getPassword());
 			
 //			if(loginedUser!=null) {
+//				allClient.put(loginedUser.getUsername(), out);//在登陆成功后将该登陆的号码和对应的通讯流存储到服务器的这个全局集合里
+//				//如果登陆成功，需要更新服务器窗口上显式的用户列表信息
 //			//如果登陆成功，需要更新服务器窗口上显式的用户列表信息
 //			model=new DefaultTableModel(new Object[][] {{loginedUser.getName(),loginedUser.getNickname()}}, tableTitle);
 //			table.setModel(model);
@@ -132,8 +137,10 @@ public class Server {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		private void RegisterMessage(Message m) {   //注册
+		} 
+		
+		//注册
+		private void RegisterMessage(Message m) {  
 			
 			qqUser  willResgisterUser=m.getFrom();
 			Boolean result=Operator.register(willResgisterUser);

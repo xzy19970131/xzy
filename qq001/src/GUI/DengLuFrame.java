@@ -112,6 +112,23 @@ public class DengLuFrame extends JFrame {
 					message.setFrom(willLoginUser);
 					out.writeObject(message);
 					out.flush();
+					
+					
+					Message result=(Message)in.readObject();
+					if(result.getFrom()==null) {
+						JOptionPane.showMessageDialog(DengLuFrame.this, "登陆失败,请检查用户名和密码!","温馨提示",JOptionPane.ERROR_MESSAGE);
+					}else
+					{
+						
+						qqUser u=result.getFrom();//登陸程序到的用戶資料，存儲在服務器給我發過來的消息裡面的From屬性裡面的
+						MainFrame  m=new MainFrame(u,in,out);
+						m.setVisible(true);
+						//com.sun.awt.AWTUtilities.setWindowOpacity(m, 0.9f);
+						DengLuFrame.this.setVisible(false);
+					}
+					
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

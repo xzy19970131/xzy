@@ -31,10 +31,8 @@ public class RegisterFrame extends JFrame {
 ObjectInputStream in;
 ObjectOutputStream out;
 private JPanel contentPane;
-
-	
 	public RegisterFrame(ObjectInputStream in, ObjectOutputStream out) {
-		this.in= in;
+		this.in = in;
 		this.out = out;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 455, 339);
@@ -135,10 +133,10 @@ private JPanel contentPane;
 				if(mima.equals(mima2)) {
 					//3.封装成MessageBox
 				
-					qqUser  u=new qqUser(name, sex, mima, age,  imagePath, nickname,signature);
-					System.out.println(u);
+					qqUser  zhuceuser=new qqUser(name, sex, mima, age,  imagePath, nickname,signature);
+					System.out.println(zhuceuser);
 					Message  registerMessage=new Message();
-					registerMessage.setFrom(u);
+					registerMessage.setFrom(zhuceuser);
 					registerMessage.setType("register");
 					
 					//4.使用序列化写给服务器，让服务器注册
