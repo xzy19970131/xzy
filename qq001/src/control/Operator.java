@@ -1,9 +1,7 @@
 package control;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
@@ -70,31 +68,30 @@ public class Operator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-
 		//准备几条数据存储到数据库里面当做测试数据
-		qqUser  qqUser=new qqUser("111","111","男",18,"老王","只要锄头轮的好，没有挖不到的墙角","redatas/images/logo.jpg");
-		qqUser  qqUser1=new qqUser("222","222","女",28,"老老王","只要锄头轮的好，有挖不到的墙角","redatas/images/logo.jpg");
-		qqUser  qqUser2=new qqUser("333","333","男",38,"姥姥老王","只要锄头轮的好，挖不到的墙角","redatas/images/logo.jpg");
-		qqUser  qqUser3=new qqUser("444","444","女",48,"老老老老王","只要锄头轮的好，的墙角","redatas/images/logo.jpg");
-		qqUser  qqUser4=new qqUser("555","555","男",18,"小王","只要锄头轮的好，的墙角啊","redatas/images/logo.jpg");
-		qqUser  qqUser5=new qqUser("666","666","男",28,"小王吧","只要锄头轮的好，的墙角玩儿","redatas/images/logo.jpg");
-		qqUser  qqUser6=new qqUser("777","777","女",58,"你是小王吧","只要锄头轮的好，的墙角是否放AA大","redatas/images/logo.jpg");
+		qqUser  qqUser=new qqUser("111","男","111",18,"/image/QQ.png","老王","只要锄头轮的好，没有挖不到的墙角");
+		qqUser  qqUser1=new qqUser("222","女","222",28,"/image/QQ.png","zyj","只要锄头轮的好，没有挖不到的墙角");
+		qqUser  qqUser2=new qqUser("333","男","333",38,"/image/QQ.png","mm","只要锄头轮的好，没有挖不到的墙角");
+		qqUser  qqUser3=new qqUser("444","女","444",48,"/image/QQ.png","yy","只要锄头轮的好，没有挖不到的墙角");
+		qqUser  qqUser4=new qqUser("555","男","555",18,"/image/QQ.png","xzy","只要锄头轮的好，没有挖不到的墙角");
+		qqUser  qqUser5=new qqUser("666","女","666",28,"/image/QQ.png","小红","只要锄头轮的好，没有挖不到的墙角");
+		qqUser  qqUser6=new qqUser("777","男","777",58,"/image/QQ.png","小明","只要锄头轮的好，没有挖不到的墙角");
+
+//		Map<String,Set<qqUser>>  myGroups=new HashMap<>();
+//		
+//		Set<qqUser>  qun1Friends=new HashSet<>();
+//		
+//		qun1Friends.add(qqUser1);
+//		qun1Friends.add(qqUser2);
+//		
+//		myGroups.put("吹牛皮群",qun1Friends);
+//		
 		
-		Map<String,Set<qqUser>>  myGroups=new HashMap<>();
 		
-		Set<qqUser>  qun1Friends=new HashSet<>();
-		
-		qun1Friends.add(qqUser1);
-		qun1Friends.add(qqUser2);
-		
-		myGroups.put("吹牛皮群",qun1Friends);
-		
-		
-		
-		Set<qqUser>  qun2Friends=new HashSet<>();
-		
-		qun2Friends.add(qqUser5);
-		qun2Friends.add(qqUser6);
+//		Set<qqUser>  qun2Friends=new HashSet<>();
+//		
+//		qun2Friends.add(qqUser5);
+//		qun2Friends.add(qqUser6);
 //		
 //		myGroups.put("扯淡群",qun2Friends);
 //		qqUser.setMyGroups(myGroups);
@@ -161,10 +158,7 @@ public class Operator {
 			out.writeObject(qqUser6);
 			out.flush();
 			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

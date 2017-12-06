@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+
 public class qqUser implements Serializable{
 	private String name;
 	private String sex;
@@ -12,7 +13,7 @@ public class qqUser implements Serializable{
 	private String imagePath;
 	private String qqUser;
 	private String nickname;
-	private static Map<String,HashSet<qqUser>>  friends=new HashMap<>();//has-a
+	private Map<String,HashSet<qqUser>>  friends=new HashMap<>();//has-a
 	public String getNickname() {
 		return nickname;
 	}
@@ -64,7 +65,7 @@ public class qqUser implements Serializable{
 		this.qqUser = qqUser;
 	}
 
-	public static Map<String, HashSet<qqUser>> getFriends() {
+	public Map<String, HashSet<qqUser>> getFriends() {
 		return friends;
 	}
 
@@ -98,4 +99,5 @@ public class qqUser implements Serializable{
 		return "qqUser [name=" + name + ", sex=" + sex + ", password=" + password + ", age=" + age + ", signature="
 				+ signature + ", imagePath=" + imagePath + ", qqUser=" + qqUser + ", nickname=" + nickname + "]";
 	}
+
 }
