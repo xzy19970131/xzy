@@ -83,7 +83,6 @@ public class qqUser implements Serializable{
 		this.password = password;
 	}
 
-	
 	public qqUser(String name, String sex, String password, int age,  String imagePath,
 			String nickname,String signature) {
 		super();
@@ -95,9 +94,12 @@ public class qqUser implements Serializable{
 		this.imagePath = imagePath;
 		this.nickname = nickname;
 	}
+
+
 	public String toString() {
 		return "qqUser [name=" + name + ", sex=" + sex + ", password=" + password + ", age=" + age + ", signature="
-				+ signature + ", imagePath=" + imagePath + ", qqUser=" + qqUser + ", nickname=" + nickname + "]";
+				+ signature + ", imagePath=" + imagePath + ", qqUser=" + qqUser + ", nickname=" + nickname;
 	}
+
 
 }

@@ -4,6 +4,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -21,6 +24,7 @@ import qqmodel.qqUser;
  *
  */
 public class Server {
+	private Map<String, ObjectOutputStream>  allClient=new HashMap<>();//记录每个客户端登陆的账号和它对应使用的输出流
 	private JTextArea serverFrame;
 	static ServerSocket serverSocket;
 	private ObjectOutputStream out;
@@ -100,8 +104,9 @@ public class Server {
 							LoginMessage(m);
 						}else if(m.getType().equals("register")) {
 							RegisterMessage(m);
-						}else if(m.getType().equals("addFriend")) {
-							
+						}else if(m.getType().equals("textMessage")|m.getType().equals("shakeMessage")) {
+							System.out.println("fuwuqishoudaole1");
+							processTextMessage(m);
 						}else if(m.getType().equals("search")) {
 							
 						}else if(m.getType().equals("update")) {
@@ -110,23 +115,60 @@ public class Server {
 						
 
 					}
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		}
+		
+		/**
+		 * 处理普通转发的文本消息的方法
+		 * @param m
+		 */
+		private  void processTextMessage(Message  m) {
+			System.out.println("jinff");
+			//当服务器接收到这个用户发送过来的文本消息的时候，我们就要遍历那个全局的集合，找到这个消息接收方的对应的输出流，把消息写给他
+			for (String username:allClient.keySet()) {
+				System.out.println("jinfor");
+				if(username.equals(m.getTo().getName())) {
+					m.setTime(new Date().toLocaleString());//在即将转发消息之前，将服务器上取到的时间设置到该消息对象里面，方便接收方显式正确的消息
+					try {
+						allClient.get(username).writeObject(m);
+						allClient.get(username).flush();
+						System.out.println("zhaodaole .xiechuqu ");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+			}
+			
+			/*//服务器再给消息发送方回发一个消息，把事件传递回去，让发送方可以显式正确的事件
+			MessageBox  timeMessage=new MessageBox();
+			timeMessage.setTime(new Date().toLocaleString());
+			try {
+				out.writeObject(timeMessage);
+				out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			
+		}
+		
 				//登陆
 		private void LoginMessage(Message  m) {
 			//链接数据库判断用户登陆信息是否正确
 			qqUser loginedUser=Operator.login(m.getFrom().getName(), m.getFrom().getPassword());
 			
-//			if(loginedUser!=null) {
-//				allClient.put(loginedUser.getUsername(), out);//在登陆成功后将该登陆的号码和对应的通讯流存储到服务器的这个全局集合里
-//				//如果登陆成功，需要更新服务器窗口上显式的用户列表信息
-//			//如果登陆成功，需要更新服务器窗口上显式的用户列表信息
+			if(loginedUser!=null) {
+				allClient.put(loginedUser.getName(), out);//在登陆成功后将该登陆的号码和对应的通讯流存储到服务器的这个全局集合里
+				//如果登陆成功，需要更新服务器窗口上显式的用户列表信息
+			//如果登陆成功，需要更新服务器窗口上显式的用户列表信息
 //			model=new DefaultTableModel(new Object[][] {{loginedUser.getName(),loginedUser.getNickname()}}, tableTitle);
 //			table.setModel(model);
-//			}
+			}
 			//当服务器根据传过来的用户名和密码查询完数据库之后，无论登陆成功还失败都要给用户回一个消息(都要封装成MessageBox)
 			Message loginResult=new Message();
 			loginResult.setFrom(loginedUser);
