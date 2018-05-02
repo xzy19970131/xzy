@@ -10,6 +10,7 @@
 <script src="js/common_js.js" type="text/javascript"></script>
 <script src="js/footer.js" type="text/javascript"></script>
 
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -28,31 +29,7 @@ ArrayList<Tea> allTeasOfTuiguang=dao.getAllTeaByTuiguang();//这里应该调用�
 
 <body>
 <%@include file="top.jsp" %>
-<!--幻灯片样式-->
-<div class="Plates"  id="mian">
-<div class="bottom_style clearfix">
-    <div class="image_display">
-	<!--幻灯片样式-->
-	  <div class="slider">
-	   <div id="slideBox" class="slideBox">
-			<div class="hd">
-				<ul></ul>
-			</div>
-			<div class="bd">
-				<ul>
-					<li><a href="#" target="_blank"><img src="images/ad-1.png" /></a></li>
-			        <li><a href="#" target="_blank"><img src="images/ad-3.jpg" /></a></li>
-				</ul>
-			</div>
-			<a class="prev" href="javascript:void(0)"></a>
-			<a class="next" href="javascript:void(0)"></a>
-		</div>
-		<script type="text/javascript">
-		jQuery(".slideBox").slide({titCell:".hd ul",mainCell:".bd ul",autoPlay:true,autoPage:true,interTime:9000});
-		</script>
-	  </div>     
-      </div>
-      </div>
+
       <!--内容样式-->
         <div class="Selling_list">        
          <div id="slideBox_list" class="slideBox_list">
@@ -165,6 +142,7 @@ ArrayList<Tea> allTeasOfTuiguang=dao.getAllTeaByTuiguang();//这里应该调用�
         	<li class="s_Products">
             <div class="Area_product_c">
                      <div class="img center"><a href="Product_Detailed.jsp?chayeid=<%=t.getChayeid()%>"><img src="Products/<%=t.getShoutu()%>.jpg" /></a></div>
+					
 		
 					   <div class="title_name"><a href="#"><%=t.getMingzi()%></a></div>
 					   <div class="s_Price clearfix">
@@ -221,8 +199,6 @@ ArrayList<Tea> allTeasOfTuiguang=dao.getAllTeaByTuiguang();//这里应该调用�
        
        
       <%@include file="Down.jsp"%>
-      
-       
-       
+     
 </body>
 </html>

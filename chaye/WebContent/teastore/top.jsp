@@ -142,3 +142,30 @@
    </div>	
   </div>
 </div>
+
+<!--幻灯片样式-->
+<div class="Plates"  id="mian">
+<div class="bottom_style clearfix">
+    <div class="image_display">
+	<!--幻灯片样式-->
+	  <div class="slider">
+	   <div id="slideBox" class="slideBox">
+			<div class="hd">
+				<ul></ul>
+			</div>
+			<div class="bd">
+				<ul>
+					<li><a href="#" target="_blank"><img src="images/ad-1.png" /></a></li>
+			        <li><a href="#" target="_blank"><img src="images/ad-3.jpg" /></a></li>
+				</ul>
+			</div>
+			<a class="prev" href="javascript:void(0)"></a>
+			<a class="next" href="javascript:void(0)"></a>
+		</div>
+		<script type="text/javascript">
+		jQuery(".slideBox").slide({titCell:".hd ul",mainCell:".bd ul",autoPlay:true,autoPage:true,interTime:9000});
+		</script>
+	 </div>     
+     </div>
+    </div>
+</div>
