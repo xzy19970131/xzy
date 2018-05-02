@@ -4,7 +4,7 @@ public class Book {
 	/**
 	 * 
 	 */
-	int Age;
+	static int Age;
 	String Name;
 	long L;
 	
