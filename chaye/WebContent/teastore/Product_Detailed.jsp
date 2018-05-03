@@ -4,9 +4,7 @@
 <%@page import="chaye.TeaDaoImp"%>
 <%
 	//在页面加载前，先把这个页面要显示的数据准备好
-	TeaDaoImp  dao=new TeaDaoImp();
-	Tea teaInfo=dao.getteaInfoById(Integer.parseInt(request.getParameter("chayeid")));
-
+	Tea t=(Tea)request.getAttribute("teaInfo2");
 %>
 
 
@@ -47,7 +45,7 @@
     <div class="clearfix" id="detail_main_img">
 	 <div class="layout_wrap preview">
      <div id="vertical" class="bigImg">
-		<img src="Products/<%=teaInfo.getShoutu()%>.jpg"        width="   " height="" alt="" id="midimg" />
+		<img src="Products/<%=t.getShoutu()%>.jpg"        width="   " height="" alt="" id="midimg" />
 		<div style="display:none;" id="winSelector"></div>
 	</div>
      <div class="smallImg">
@@ -81,10 +79,10 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
    <!--信息样式-->
     <div class="textInfo">
     <form action="javascript:addToCart(97)" name="ECS_FORMBUY" id="ECS_FORMBUY">
-	  <div class="title"><h1><%=teaInfo.getMingzi() %></h1><p>进口饼干糕点 西式糕点 休闲轻松</p></div>
+	  <div class="title"><h1><%=t.getMingzi() %></h1><p>进口饼干糕点 西式糕点 休闲轻松</p></div>
 	  <div class="mod_detailInfo_priceSales">
 	  <div class="margins">
-	  <div class="Price clearfix text_name"><label>价格</label><span class="Prices"><h4>￥<%=teaInfo.getXianjia()%></h4> <b><%=teaInfo.getYuanjia() %></b></span></div>
+	  <div class="Price clearfix text_name"><label>价格</label><span class="Prices"><h4>￥<%=t.getXianjia()%></h4> <b><%=t.getYuanjia() %></b></span></div>
 	  <div class="Activity clearfix text_name"><label>重量</label><span class="weight">345克</span></div>
       <div class="Size clearfix text_name"><label>规格</label><a href="#">袋装</a><a href="#">礼盒装</a><a href="#">铁盒</a></div>
       <div class="Sales_volume">

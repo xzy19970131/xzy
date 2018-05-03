@@ -141,9 +141,8 @@ ArrayList<Tea> allTeasOfTuiguang=dao.getAllTeaByTuiguang();//这里应该调用�
 			%>
         	<li class="s_Products">
             <div class="Area_product_c">
-                     <div class="img center"><a href="Product_Detailed.jsp?chayeid=<%=t.getChayeid()%>"><img src="Products/<%=t.getShoutu()%>.jpg" /></a></div>
-					
-		
+                     <div class="img center"><a href="TeaServlet?method=detail&chayeid=<%=t.getChayeid()%>"><img src="Products/<%=t.getShoutu()%>.jpg" /></a></div>
+					 
 					   <div class="title_name"><a href="#"><%=t.getMingzi()%></a></div>
 					   <div class="s_Price clearfix">
                        <span class="Current_price">商城价<em>￥<%=t.getXianjia()%></em></span>

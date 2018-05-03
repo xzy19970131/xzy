@@ -1,3 +1,4 @@
+<%@page import="chaye.UserDao"%>
 <%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="chaye.User" %>
@@ -11,10 +12,11 @@
 	
 	
    	 <%
-	  if( session.getAttribute("loginedUser")!=null) { 
+ 	User u=(User)session.getAttribute("loginedUser");    //取出User数据
+	  if( u!=null) { 
  %> 
 	   
-	   <li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<a href="login.jsp" class="red"><%=((User)session.getAttribute("loginedUser")).getXingming() %></a> 新用户<a href="#" class="red">[免费注册]</a></li>
+	   <li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<a href="login.jsp" class="red"><%=u.getXingming() %></a> 新用户<a href="#" class="red">[免费注册]</a></li>
 	   <%}else{ %>
 <li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<a href="login.jsp" class="red">[请登录]</a> 新用户<a href="#" class="red">[免费注册]</a></li>
 	   <%} %>
