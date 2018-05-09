@@ -1,6 +1,7 @@
 package chaye;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -33,7 +34,7 @@ public class TeaDaoImp extends BaseDaoImp implements TeaDao{
 	/**
 	 * 根据传入的数量查询出最近的指定数量的二手车信息
 	 */
-	public ArrayList<Tea>  listRecentTeasByCount(int count){
+	public ArrayList<Tea>  listRecentTeasByCount(int count){  /**/
 		ArrayList<Tea>  Teas=new  ArrayList<Tea>();//定义一个集合存储查询出来的所有车辆信息
 		ResultSet rs=null;
 	try {
@@ -65,7 +66,7 @@ public class TeaDaoImp extends BaseDaoImp implements TeaDao{
 		rs=getSta().executeQuery("select *  from  chaye   where  shifoutuiguang=1");
 		while(rs.next())
 		{
-			Tea  c=new Tea();
+
 			Tea  t=new Tea();
 			t.setChayeid(rs.getInt("chayeid"));
 			t.setMingzi(rs.getString("mingzi"));
@@ -73,7 +74,7 @@ public class TeaDaoImp extends BaseDaoImp implements TeaDao{
 			t.setXianjia(rs.getInt("xianjia"));
 			t.setShoutu(rs.getInt("yshoutu"));
 			t.setPinglunshu(rs.getInt("pinglunshu"));
-			Teas.add(c);
+			Teas.add(t);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -149,6 +150,53 @@ public class TeaDaoImp extends BaseDaoImp implements TeaDao{
 	}
 	disposeResource(getSta(), rs, getCon());
 		return  teas;
+	}
+
+	@Override
+	public ArrayList<Tea> listTeaByPage(int page, int count) {
+		ArrayList<Tea> Teas = new ArrayList<Tea>();// 定义一个集合存储查询出来的所有车辆信息
+		ResultSet rs = null;
+		try {
+			rs = getSta().executeQuery("select *  from  chaye   limit  "+(page-1)*count+" ,"+count);
+			while (rs.next()) {
+
+				Teas.add(parsetResultToTea(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		disposeResource(getSta(), rs, getCon());
+		return Teas;
+	}
+
+	private Tea parsetResultToTea(ResultSet rs) {
+		Tea t = null;
+		try {
+			t = new Tea();
+			t.setChayeid(rs.getInt("chayeid"));
+			t.setMingzi(rs.getString("mingzi"));
+			t.setYuanjia(rs.getInt("yuanjia"));
+			t.setXianjia(rs.getInt("xianjia"));
+			t.setShoutu(rs.getInt("shoutu"));
+			t.setPinglunshu(rs.getInt("pinglunshu"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return t;
+	}
+
+	@Override
+	public int getAllCountOfTeas() {
+		int  n=0;
+		ResultSet  rs=null;
+		try {
+			  rs=getSta().executeQuery("select count(chayeid)  from  chaye");
+			  rs.next();
+			  n=rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return n;
 	}
 	
 	

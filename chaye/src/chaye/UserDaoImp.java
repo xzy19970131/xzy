@@ -1,13 +1,24 @@
 package chaye;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+
 
 public class UserDaoImp extends BaseDaoImp implements UserDao {
 	
 	public boolean add(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		User user=(User)o;
+		boolean result=false;
+		Statement  sta=null;
+		try {
+			sta=getSta();
+			int count=sta.executeUpdate("insert into  user(userid,mima,youxiang,xingming) values('"+user.getUserid()+"','"+user.getMima()+"','"+user.getYouxiang()+"','"+user.getXingming()+"')");
+			result=(count>0)?true:false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public boolean delete(Object id) {

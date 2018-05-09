@@ -110,14 +110,27 @@
 
    </ul>
    <div class="Paging_style">
-     <a href="#" class="pn-prev disabled">&lt;上一页</a>
+   
+   
+   				
+	<a  href="TeaServlet?method=listTeaByPage&page=1&count=3"  class="pages">首页</a>
+	<a  href="TeaServlet?method=listTeaByPage&page=${requestScope.pageBean.previousPage}&count=20"  class="pages">上一页</a>
+	<a  href="TeaServlet?method=listTeaByPage&page=${requestScope.pageBean.nextPage}&count=20"  class="pages">下一页</a>
+	<a  href="TeaServlet?method=listTeaByPage&page=${requestScope.pageBean.allPages}&count=20"  class="pages">尾页</a>
+	
+	当前第${requestScope.pageBean.nowPage}页/总共${requestScope.pageBean.allPages}页，
+	每页${requestScope.pageBean.everPageCount}条/总共${requestScope.pageBean.allCount}条,
+	跳到第
+						
+   
+     <!-- <a href="#" class="pn-prev disabled">&lt;上一页</a>
 	 <a href="#" class="on">1</a>
 	 <a href="#">2</a>
 	 <a href="#">3</a>
 	 <a href="#">4</a>
 	 <a href="#">下一页&gt;</a>
 	 <a href="#">尾页</a>
-	<span class="p-skip"><em>共<b>232</b>页&nbsp;&nbsp;到第</em><input id="page_jump_num" value="1" onkeydown="javascript:if(event.keyCode==13){page_jump();return false;}" class="input-txt"><em>页</em><a href="javascript:page_jump();" class="btn btn-default">确定</a></span>
+	<span class="p-skip"><em>共<b>232</b>页&nbsp;&nbsp;到第</em><input id="page_jump_num" value="1" onkeydown="javascript:if(event.keyCode==13){page_jump();return false;}" class="input-txt"><em>页</em><a href="javascript:page_jump();" class="btn btn-default">确定</a></span> -->
    </div>
  </div>
       </div>

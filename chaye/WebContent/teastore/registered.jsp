@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,7 +30,7 @@
         <ul><li>快速注册</li><li>普通注册</li></ul>
        </div>
        <div class="bd">
-        <ul>
+     <!--    <ul>
          <form id="form1" name="form1" method="post" action=""> 
 	   <div class="form clearfix">	
         <div class="item"><label class="rgister-label">手&nbsp;&nbsp;机&nbsp;&nbsp;号：</label><input name="" type="text"  class="text" /></div>
@@ -41,19 +41,20 @@
                 </div>
        </div>
        <div class="rgister-btn">
-	  <a href="javascript:;" class="btn_rgister">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+	  <a href="UserServlet?method=registered" class="btn_rgister">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
 	  </div>
 	  <div class="Note"><span class="login_link">已是会员<a href="login.html">请登录</a></span></div>	  
        </form>
-        </ul>
+        </ul> -->
         <ul>
-            <form id="form1" name="form1" method="post" action=""> 
+            <form id="form1" name="form1" method="post" action="UserServlet"> 
+            <input type="hidden" name="method" value="registered">
 	   <div class="form clearfix">	
-	    <div class="item"><label class="rgister-label">用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label><input name="" type="text"  class="text" /><b>*</b></div>
-		<div class="item"><label class="rgister-label" >密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label><input name="" type="password"  class="text" p/><b>*</b></div> 
+	    <div class="item"><label class="rgister-label">账&nbsp;&nbsp;名：</label><input name="userid" type="text"  class="text" /><b>*</b></div>
+		<div class="item"><label class="rgister-label" >密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label><input name="mima" type="password"  class="text" p/><b>*</b></div> 
 	    <div class="Password_qd"><ul><li class="r">弱</li><li class="z">中</li><li class="q">强</li></ul></div>
-		<div class="item"><label class="rgister-label " >确认密码：</label><input name="" type="password"  class="text" /><b>*</b></div>
-	    <div class="item"><label class="rgister-label" >电子邮箱：</label><input name="" type="text"  class="text" /><b>*</b></div> 
+		<div class="item"><label class="rgister-label " >姓名：</label><input name="xingming" type="text"  class="text" /><b>*</b></div>
+	    <div class="item"><label class="rgister-label" >电子邮箱：</label><input name="youxiang" type="text"  class="text" /><b>*</b></div> 
 	 
 	    <div class="item "><label  class="rgister-label ">验&nbsp;证&nbsp;码：</label><input name="" type="text"  class="Recommend_text" /></div>
 		<div class="item-ifo">
@@ -62,7 +63,9 @@
                 </div>
 	  </div>	
 	  <div class="rgister-btn">
-	  <a href="javascript:;" class="btn_rgister">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+	 <button type="submit">注&nbsp;&nbsp;&nbsp;&nbsp;册</button> 
+	<!--  <button id="submitSearch" class="submit-search" type="submit">注册</button> -->
+	<!-- <a href="javascript:;" class="btn_rgister">注&nbsp;&nbsp;&nbsp;&nbsp;册</a> -->
 	  </div>
 	  <div class="Note"><span class="login_link">已是会员<a href="login.html">请登录</a></span></div>	  
 	  </form>

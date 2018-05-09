@@ -36,11 +36,57 @@ public class UserServlet extends HttpServlet {
 				getUserInfoBydenglu(request, response);
 				break;	
 			}
-			case "zhuce":{	
+			case "registered":{	
+				registered(request, response);
+				break;
 			}
 		}
 	
 	}
+
+	private void registered(HttpServletRequest request, HttpServletResponse response) throws
+	ServletException, IOException {
+	/*	//1.先去除用户输入的验证码
+		String  code=request.getParameter("code");
+		System.out.println("您在网页上输入的验证码："+code);
+		//2.取出系统生成的验证码值
+		String  systemCode=request.getSession().getAttribute("generateCode").toString();
+		if(!code.equalsIgnoreCase(systemCode)) {//equlas会比较内容和大小写，   equalsingonrecase
+			System.out.println("验证码验证失败了，立马调到前台页面");
+			request.setAttribute("loginResultMessage", "codeError");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			//在后台servlet中，代码里面如果转发和重定向后面继续写其他业务代码，会报错
+				return ;
+		}*/
+	
+		int userid = Integer.parseInt(request.getParameter("userid"));
+		String mima = request.getParameter("mima");
+		String xingming= request.getParameter("xingming");
+		//String password = request.getParameter("password");
+		String youxiang = request.getParameter("youxiang");
+		
+		User user=new User();
+		user.setUserid(userid);
+		user.setMima(mima);
+		user.setXingming(xingming);
+		user.setYouxiang(youxiang);
+		
+		
+		
+		//user.setPassword(MD5.MD5(password));//在将表单提交过来的密码风涨到user对象前，先用md5算法把密码加密
+		boolean  result=dao.add(user);
+		if(result) {
+			request.setAttribute("loginResultMessage", "registerSuccess");
+		}else
+		{
+			request.setAttribute("loginResultMessage", "registerFail");
+		}
+
+		
+		request.setAttribute("loginResultMessage", "codeError");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+
 
 	private void getUserInfoBydenglu(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

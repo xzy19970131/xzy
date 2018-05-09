@@ -16,9 +16,9 @@
 	  if( u!=null) { 
  %> 
 	   
-	   <li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<a href="login.jsp" class="red"><%=u.getXingming() %></a> 新用户<a href="#" class="red">[免费注册]</a></li>
+	   <li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<a href="login.jsp" class="red"><%=u.getXingming() %></a>新用户<a href="registered.jsp" class="red">[免费注册]</a></li>
 	   <%}else{ %>
-<li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<a href="login.jsp" class="red">[请登录]</a> 新用户<a href="#" class="red">[免费注册]</a></li>
+<li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<a href="login.jsp" class="red">[请登录]</a> 新用户<a href="registered.jsp" class="red">[免费注册]</a></li>
 	   <%} %>
 	
  

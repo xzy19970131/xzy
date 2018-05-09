@@ -18,17 +18,24 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="chaye.TeaDaoImp"%>
 <%@page import="chaye.Tea"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %><!-- EL的函数库=jstl的函数 -->
+
 <%
-TeaDaoImp  dao=new TeaDaoImp();
-ArrayList<Tea> TeaDaoImpallTeas=dao.listRecentTeasByCount(24);//这里应该调用查询N个车辆信息的方法，把需要显示在首页的车辆信息查询出来
-ArrayList<Tea> allTeasOfTuiguang=dao.getAllTeaByTuiguang();//这里应该调用的是查询那些推广的车辆信息的方法
+//TeaDaoImp  dao=new TeaDaoImp();p
+//ArrayList<Tea> TeaDaoImpallTeas=dao.listRecentTeasByCount(24);//这里应该调用查询N个车辆信息的方法，把需要显示在首页的车辆信息查询出来
+//ArrayList<Tea> allTeas=(ArrayList<Tea> )request.getAttribute("allTeas");
 %>
+<c:if test="${requestScope.allTeas  eq  null}">
+	<c:redirect  url="TeaServlet?method=index"></c:redirect><!-- 跳转页面的标签，重定向 -->
+</c:if>
 
 <title>茶叶商城首页</title>
 </head>
 
 <body>
-<%@include file="top.jsp" %>
+<%-- <%@include file="top.jsp" %> --%>
+<c:import url="top.jsp"></c:import>
 
       <!--内容样式-->
         <div class="Selling_list">        
@@ -130,31 +137,35 @@ ArrayList<Tea> allTeasOfTuiguang=dao.getAllTeaByTuiguang();//这里应该调用�
           </div>
           <div class="Area_p_list">
           <ul>
-        <%
-
+  <%
 //***********************************************
 //***********************************************
 //***********************************************
-//***********************************************
-         	for(Tea t:TeaDaoImpallTeas)
-        {		
-			%>
+//***********************************************%>
+      <c:forEach  var="t"  items="${requestScope.allTeas }" varStatus="s">
+        		
+			
         	<li class="s_Products">
             <div class="Area_product_c">
-                     <div class="img center"><a href="TeaServlet?method=detail&chayeid=<%=t.getChayeid()%>"><img src="Products/<%=t.getShoutu()%>.jpg" /></a></div>
+                     <div class="img center">
+                     		<a href="TeaServlet?method=detail&chayeid=${t.chayeid}"><img src="Products/${t.shoutu}.jpg" />
+                     		</a>
+                     </div>
 					 
-					   <div class="title_name"><a href="#"><%=t.getMingzi()%></a></div>
+					   <div class="title_name"><a href="#">${t.mingzi}</a></div>
 					   <div class="s_Price clearfix">
-                       <span class="Current_price">商城价<em>￥<%=t.getXianjia()%></em></span>
-                       <span class="Original_Price">原价&nbsp;<em><%=t.getYuanjia()%></em></span>
+                       <span class="Current_price">商城价<em>￥${t.xianjia}</em></span>
+                       <span class="Original_Price">原价&nbsp;<em>${t.yuanjia}</em></span>
              			  </div>
             </div>
            
            </li>
       
-        <% }%>
-        
-        
+  			</c:forEach>
+  			
+  			
+ 	 <a href="TeaServlet?method=listTeaByPage&page=1&count=20">查看更多>></a>
+ 	 	<!-- <a href="CarServlet?method=listCarByPage&page=1&count=3" class="see">查看更多</a> -->
   
          
           </ul>
