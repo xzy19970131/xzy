@@ -8,7 +8,7 @@ public interface BaseDao {//提取父接口(父类应该干的事情，把一些
 	public String password="root";
 	
 	//添加
-	public boolean add(Object o);
+	public boolean add(Object o); 
 	
 	public boolean  delete(Object id);
 	
