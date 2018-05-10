@@ -43,7 +43,7 @@ public class UserDaoImp extends BaseDaoImp implements UserDao {
 
 	
 
-	public User getUserInfoBydenglu(String userid,String mima) {
+	public User getUserInfoBydenglu(String userid) {
 		User  u = new User();
 		ResultSet rs=null;
 		try {

@@ -63,6 +63,7 @@
                 </div>
 	  </div>	
 	  <div class="rgister-btn">
+	  
 	 <button type="submit">注&nbsp;&nbsp;&nbsp;&nbsp;册</button> 
 	<!--  <button id="submitSearch" class="submit-search" type="submit">注册</button> -->
 	<!-- <a href="javascript:;" class="btn_rgister">注&nbsp;&nbsp;&nbsp;&nbsp;册</a> -->

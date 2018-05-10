@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import chaye.Tea;
 import chaye.TeaDaoImp;
 import chaye.User;
 import chaye.UserDaoImp;
+import fujia.MD5;
 import chaye.UserDaoImp;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class UserServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");          //post是加密，要在最前面一个都没有取的时候就设置，get是不加密的，必须要用强制转码
 		String methodName = request.getParameter("method");
 		System.out.println(methodName);
 			switch(methodName) {
@@ -60,14 +63,21 @@ public class UserServlet extends HttpServlet {
 		}*/
 	
 		int userid = Integer.parseInt(request.getParameter("userid"));
+		
+		System.out.println("前"+request.getCharacterEncoding());
+		
+		System.out.println("后"+request.getCharacterEncoding());
 		String mima = request.getParameter("mima");
 		String xingming= request.getParameter("xingming");
+		System.out.println("999999999");
+		System.out.println("账号:"+userid);
+		System.out.println("姓名:"+xingming);
 		//String password = request.getParameter("password");
 		String youxiang = request.getParameter("youxiang");
 		
 		User user=new User();
 		user.setUserid(userid);
-		user.setMima(mima);
+		user.setMima(fujia.MD5.MD5(mima));
 		user.setXingming(xingming);
 		user.setYouxiang(youxiang);
 		
@@ -98,12 +108,23 @@ public class UserServlet extends HttpServlet {
 
 		//2.根据数据查询数据库，找到对应的车辆信息
 		UserDaoImp  dao=new UserDaoImp();
-		User  searchedUsers=dao.getUserInfoBydenglu(userid,mima);
-		//3.当数据准备完毕之后，应该跳转到下一个页面(jsp)
-		request.getSession().setAttribute("loginedUser", searchedUsers);//回话范围内存储用户资料，这样能保证用户在一次绘画中可以保留用户登录的信息
-		request.getRequestDispatcher("index.jsp").forward(request,response); //request对象负责让这个jsp跳转到下一个页面
-		// response.sendRedirect("all-listings.jsp");//response对象的这个方法是重定向，它也会让当前jsp跳转到下一个制定的jsp
-	
+		User  searchedUsers=dao.getUserInfoBydenglu(userid);
+		
+		if(searchedUsers.getMima().equals(MD5.MD5(mima)))
+		{
+			//3.当数据准备完毕之后，应该跳转到下一个页面(jsp)
+			request.getSession().setAttribute("loginedUser", searchedUsers);//回话范围内存储用户资料，这样能保证用户在一次绘画中可以保留用户登录的信息
+			request.getRequestDispatcher("index.jsp").forward(request,response); //request对象负责让这个jsp跳转到下一个页面
+			// response.sendRedirect("all-listings.jsp");//response对象的这个方法是重定向，它也会让当前jsp跳转到下一个制定的jsp
+		
+		}
+		else {
+			request.getRequestDispatcher("404.jsp").forward(request,response); //request对象负责让这个jsp跳转到下一个页面
+		}
+		
+		
+		
+		
 	}
 
 

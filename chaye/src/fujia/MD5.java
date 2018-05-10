@@ -1,4 +1,4 @@
-package com.oracle.carshop.util;
+package fujia;
 
 
 import java.security.MessageDigest;
@@ -54,14 +54,10 @@ public class MD5 {
 		  System.out.println("原始：" + s);
 		  System.out.println(MD5(s));
 		  
-		  String s2 = "123456";
-		  System.out.println("原始：" + s2);
-		  System.out.println(MD5(s2));
-		  
-//		  System.out.println(KL(MD5(s)));
-//		  System.out.println("MD5后：" + MD5(s));
-//		  System.out.println(JM(MD5(s)));
-//		  System.out.println("MD5后再加密：" + KL(MD5(s)));
-//		  System.out.println("解密为MD5后的：" + JM(KL(MD5(s))));
+/*		 
+		  System.out.println("MD5后：" + MD5(s));
+		  System.out.println(JM(MD5(s)));
+		  System.out.println("MD5后再加密：" + KL(MD5(s)));
+		  System.out.println("解密为MD5后的：" + JM(KL(MD5(s))));*/
 		 }
 }
