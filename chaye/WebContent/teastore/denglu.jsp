@@ -19,7 +19,7 @@ String  mima=request.getParameter("mima");//密码
 
 //2.根据数据查询数据库，找到对应的车辆信息
 UserDaoImp  dao=new UserDaoImp();
-User  searchedUsers=dao.getUserInfoBydenglu(userid,mima);
+User  searchedUsers=dao.getUserInfoBydenglu(userid);
 
 //3.当数据准备完毕之后，应该跳转到下一个页面(jsp)
 session.setAttribute("loginedUser", searchedUsers);//回话范围内存储用户资料，这样能保证用户在一次绘画中可以保留用户登录的信息

@@ -100,6 +100,28 @@ public class UserServlet extends HttpServlet {
 
 	private void getUserInfoBydenglu(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//1.先去除用户输入的验证码
+				String  code=request.getParameter("code");
+				System.out.println("您在网页上输入的验证码："+code);
+				if(request.getParameter("code")!=null)
+				{
+					//2.取出系统生成的验证码值
+					String  systemCode=request.getSession().getAttribute("generateCode").toString();
+					if(!code.equalsIgnoreCase(systemCode)) {//equlas会比较内容和大小写，   equalsingonrecase
+						System.out.println("验证码验证失败了，立马调到前台页面");
+						request.setAttribute("loginResultMessage", "codeError");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+						//在后台servlet中，代码里面如果转发和重定向后面继续写其他业务代码，会报错
+							return ;
+					}
+				}
+		
+		
+		
+		
+		
+		
 		//jsp如果充当是后台组件，那么应该吧所有的html标签删除
 
 		//1.获取用户从上一个页面提交时输入的数据
@@ -119,7 +141,7 @@ public class UserServlet extends HttpServlet {
 		
 		}
 		else {
-			request.getRequestDispatcher("404.jsp").forward(request,response); //request对象负责让这个jsp跳转到下一个页面
+			request.getRequestDispatcher("mm.jsp").forward(request,response); //request对象负责让这个jsp跳转到下一个页面
 		}
 		
 		

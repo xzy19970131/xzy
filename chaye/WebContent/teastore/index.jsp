@@ -11,6 +11,7 @@
 <script src="js/footer.js" type="text/javascript"></script>
 
 
+<%-- <c:import url="java.util.ArrayList"></c:import> --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -55,6 +56,7 @@
                        <span class="Original_Price">原价&nbsp;<em>76.00</em></span>
                        </div>
                        <div class="p_comment">已有<a href="#">2345</a>人评论</div>
+             
               </div>
 				 </li>
 					
@@ -157,13 +159,17 @@
                        <span class="Current_price">商城价<em>￥${t.xianjia}</em></span>
                        <span class="Original_Price">原价&nbsp;<em>${t.yuanjia}</em></span>
              			  </div>
+             			  
+             			  
+             			
+             			  
             </div>
+           
            
            </li>
       
   			</c:forEach>
-  			
-  			
+
  	 <a href="TeaServlet?method=listTeaByPage&page=1&count=20">查看更多>></a>
  	 	<!-- <a href="CarServlet?method=listCarByPage&page=1&count=3" class="see">查看更多</a> -->
   

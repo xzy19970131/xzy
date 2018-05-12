@@ -24,11 +24,11 @@
 
 
 
-<div class="login_bg">
+<div class="login_bg" >
 <div class="login Narrow">
    <div class="login_advertising"><img src="images/bg_03.png" /></div>
    
-   <form action= "UserServlet">
+   <form action= "UserServlet"  method="post" id="loginForm">
    <input type="hidden" name="method"  value="denglu" />
   
   <div class="login_frame">
@@ -41,16 +41,66 @@
 		 </div>
 		 <div class="item item-fore2"><label for="nloginpwd" class="login-label pwd-label" ></label><input name="mima" type="password"  class="text" placeholder="用户密码"/>
 	     </div> 
+	     
+	      <p>
+				<label>验证码</label>
+				<img id="code" src="CodeServlet"  style="position: relative;top: 11px;" />
+				<input class="input-medium" type="text"  name="code" style="width: 50px;"/>
+			</p>
+
+	<!--      <input name="yzm" type="yzm"  placeholder="验证码"/>
+	  -->
+	 
+			<!-- 	<label>验证码</label>
+			<img id="code" src="CodeServlet"  style="position: relative;top: 11px;" />
+			<input  type="text"  name="code" style="width: 60px;"/>
+		   -->
+	     
 	     <div class="Forgetpass"><a href="#">忘记密码？</a></div>
 	    </div>	
 	    <div class="login-btn">
-	    
-	   	<button type="submit">登&nbsp;录</button>
+	
+	         <a href="javascript:;" class="btn_login" id="submitButton">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+	<!--  <button type="submit">登&nbsp;录</button>  -->
+	 
+
+<!-- $(".btn_login").click(function    //Tensir老师说事件注入
+
+
+location.href='Usersxxx';) -->
 	
 	  </div>
     </div>
+    <script type="text/javascript">
+	$(document).ready(function(){
+/* 		$("#registerButton").click(function(){
+			$("#method").val("register");
+			$("#loginForm").submit();//用jquery提交表单的代码
+		}) */
+
+/* 		$("#closeLogin").click(function(){
+			$("#loginDiv").css("right",-220);
+			$("#login").show();
+		}) */
+			
+		$("#submitButton").click(function(){      //登陆用<a>超链接时候，添加事件注入，起到跟submit一样的作用
+			$("#loginForm").submit();
+		})
+		
+		/* $("[name='sellCar']").mouseover(function(){
+			$(this).css("boxShadow","-1px -1px  12px  red");
+		}) */
+	/* 	$("[name='sellCar']").mouseout(function(){
+			$(this).css("boxShadow","");
+		}) */
+		$("#code").click(function(){
+			$("#code").attr("src",'CodeServlet?time='+new Date());
+		})
+	
+	});
+	</script>
+
     <div class="Login_Method">
-     
     </div>
   </div>
   
