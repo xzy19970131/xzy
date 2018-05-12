@@ -3,6 +3,7 @@ package control;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -100,6 +101,7 @@ public class UserServlet extends HttpServlet {
 
 	private void getUserInfoBydenglu(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	
 		
 		//1.先去除用户输入的验证码
 				String  code=request.getParameter("code");
@@ -140,7 +142,7 @@ public class UserServlet extends HttpServlet {
 			// response.sendRedirect("all-listings.jsp");//response对象的这个方法是重定向，它也会让当前jsp跳转到下一个制定的jsp
 		
 		}
-		else {
+		else { //账号密码错误
 			request.getRequestDispatcher("mm.jsp").forward(request,response); //request对象负责让这个jsp跳转到下一个页面
 		}
 		
