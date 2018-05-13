@@ -45,7 +45,7 @@
     <div class="clearfix" id="detail_main_img">
 	 <div class="layout_wrap preview">
      <div id="vertical" class="bigImg">
-		<img src="Products/<%=t.getShoutu()%>.jpg"        width="   " height="" alt="" id="midimg" />
+		<img src="Products/${requestScope.teaInfo2.shoutu}.jpg"        width="   " height="" alt="" id="midimg" />
 		<div style="display:none;" id="winSelector"></div>
 	</div>
      <div class="smallImg">

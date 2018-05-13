@@ -19,17 +19,27 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="chaye.TeaDaoImp"%>
 <%@page import="chaye.Tea"%>
-<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %><!-- EL的函数库=jstl的函数 -->
 
-<%
-//TeaDaoImp  dao=new TeaDaoImp();p
-//ArrayList<Tea> TeaDaoImpallTeas=dao.listRecentTeasByCount(24);//这里应该调用查询N个车辆信息的方法，把需要显示在首页的车辆信息查询出来
-//ArrayList<Tea> allTeas=(ArrayList<Tea> )request.getAttribute("allTeas");
-%>
 <c:if test="${requestScope.allTeas  eq  null}">
 	<c:redirect  url="TeaServlet?method=index"></c:redirect><!-- 跳转页面的标签，重定向 -->
 </c:if>
+
+<%-- <c:set var="age" value="66" scope="request"></c:set>   测试<c:choose>标签用法 
+<c:choose>
+	<c:when test="${requestScope.age<10 }">111</c:when>
+	<c:when test="${requestScope.age<20 }">222</c:when>
+	<c:when test="${requestScope.age<30 }">333</c:when>
+	<c:when test="${requestScope.age<40 }">444</c:when>
+	<c:otherwise>sss</c:otherwise>
+</c:choose> --%>
+
+
+<c:forTokens items="肖振宇，王，啦啦啦" delims="，" var="n">
+<Span style="border: 1px black yellow; margin-right: 10px;">${n }</Span>
+</c:forTokens>
 
 <title>茶叶商城首页</title>
 </head>
@@ -139,11 +149,11 @@
           </div>
           <div class="Area_p_list">
           <ul>
-  <%
+  <%--
 //***********************************************
 //***********************************************
 //***********************************************
-//***********************************************%>
+//***********************************************--%>
       <c:forEach  var="t"  items="${requestScope.allTeas }" varStatus="s">
         		
 			
@@ -154,7 +164,7 @@
                      		</a>
                      </div>
 					 
-					   <div class="title_name"><a href="#">${t.mingzi}</a></div>
+					   <div class="title_name"><a href="#"><%-- ${fn:substring(t.mingzi,0,2)} 第一个是数据源，第二个是开始位子，第三个是长度为2--%>${t.mingzi}</a></div>
 					   <div class="s_Price clearfix">
                        <span class="Current_price">商城价<em>￥${t.xianjia}</em></span>
                        <span class="Original_Price">原价&nbsp;<em>${t.yuanjia}</em></span>
@@ -213,8 +223,8 @@
          </div>
        </div>
        
-       
-      <%@include file="Down.jsp"%>
+       <c:import url="Down.jsp"></c:import>   <!-- 用JSTL导入 -->
+    <%--   <%@include file="Down.jsp"%> --%>
      
 </body>
 </html>

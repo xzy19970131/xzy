@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="chaye.Tea"%>
 <%@page import="java.util.ArrayList"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -84,12 +85,9 @@
  <div class="p_list  clearfix">
    <ul>
    
-   		<%
+<%--    		<%
 					ArrayList<Tea>  teas=(ArrayList<Tea> )request.getAttribute("teas");
-					for(Tea  t:teas) {
-						%>
-
-   
+					for(Tea  t:teas) {%>
     <li class="gl-item">
 	<div class="Borders">
 	 <div class="img"><a href="Product_Detailed.html"><img src="Products/<%=t.getShoutu()%>.jpg" style="width:220px;height:220px"/></a></div>	 
@@ -102,11 +100,23 @@
 	 </div>
 	 </div>
 	</li>
-
-
-		<%
-					}%>
-
+		<%}%> --%>
+   <c:forEach items="${requestScope.teas }" var="t" varStatus="s" step="2"><!-- varStatus显示循环的状态      下面的index是序列    count是迭代的第几个       
+         step是迭代的间隔，默认是1 -->
+     
+    <li class="gl-item">	<%-- ${s.index} ..${s.count} --%>
+	<div class="Borders">
+	 <div class="img"><a href="Product_Detailed.html"><img src="Products/${t.shoutu}.jpg" style="width:220px;height:220px"/></a></div>	 
+	 <div class="name"><a href="Product_Detailed.html">${t.mingzi}</a></div>
+     <div class="Price">商城价：<b>¥${t.xianjia}</b><span>原价：<em>${t.yuanjia}</em></span></div>
+	 <div class="Review">已有<a href="#">2345</a>评论</div>
+	 <div class="p-operate">
+	  <a href="#" class="p-o-btn Collect"><em></em>收藏</a>
+	  <a href="#" class="p-o-btn shop_cart"><em></em>加入购物车</a>
+	 </div>
+	 </div>
+	</li>
+</c:forEach>
 
    </ul>
    <div class="Paging_style">

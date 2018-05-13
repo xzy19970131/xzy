@@ -73,11 +73,11 @@
 	</div>
 	<form action="searchCarByCondition.jsp" id="boxpanel" class="form-panel" />
 	<input type="hidden" name="method" value="chazhao">
-	茶叶名<input type="text"  id="chayeming" name="mingzi">	
+	茶叶名<input type="text"  id="chayeming" name="mingzi" value=${param.mingzi}>	
     <div class="Menu_list">	
 	    <div class="menu_title">茶叶价格</div>
-    	 最低价<input type="text" style="width: 20px" id="zuidijia" name="min">-----
-		<input type="text" style="width: 20px" id="zuigaojia" name="max">最高价
+    	 最低价<input type="text" style="width: 20px" id="zuidijia" name="min" value=${param.min}>-----
+		<input type="text" style="width: 20px" id="zuigaojia" name="max" value=${param.max}>最高价
     	 <br>
      	<button id="submitSearch" class="submit-search" type="submit">查找</button>   <!-- 这里一定要用 type=submit ，才能提交表单-->
 		
