@@ -60,7 +60,7 @@
 	    </div>	
 	    <div class="login-btn">
 	
-	         <a href="javascript:;" class="btn_login" id="submitButton">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+	         <a href="#" class="btn_login" id="submitButton">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
 	<!--  <button type="submit">登&nbsp;录</button>  -->
 	 
 
