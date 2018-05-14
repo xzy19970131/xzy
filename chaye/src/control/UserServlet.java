@@ -18,7 +18,7 @@ import chaye.UserDaoImp;
 
 import java.util.ArrayList;
 
-@WebServlet("/teastore/UserServlet")    
+@WebServlet("/UserServlet")    
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UserDaoImp dao;

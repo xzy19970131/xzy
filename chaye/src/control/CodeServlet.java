@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CodeServlet
  */
-@WebServlet("/teastore/CodeServlet")
+@WebServlet("/CodeServlet")
 public class CodeServlet extends HttpServlet {
 	
 	 private static int width = 90;// 定义图片的width

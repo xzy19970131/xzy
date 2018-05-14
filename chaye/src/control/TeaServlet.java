@@ -17,7 +17,7 @@ import chaye.TeaDao;
 import chaye.TeaDaoImp;
 
 
-@WebServlet("/teastore/TeaServlet")
+@WebServlet("/TeaServlet")
 public class TeaServlet extends HttpServlet {
 	
 
