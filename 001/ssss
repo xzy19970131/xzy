@@ -1,0 +1,3 @@
+create  database  aaa  charset=utf8;
+
+create table  users(xxx  int ) charset=utf8;
