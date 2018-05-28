@@ -1,4 +1,4 @@
-package xzy;
+package xm;
 /*svm*/
 public class Test2 {
 
