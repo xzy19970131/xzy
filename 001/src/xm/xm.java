@@ -15,17 +15,45 @@ import md.readLine;
 
 
 public class xm {
-	 static String[] s; 
+	 static String[] s;
+	 
+	 
+	 
+	 public static void getFileName() 
+     {
+    	 String path = "C:\\Users\\lenovo\\Desktop\\myimg"; // 路径
+        File f = new File(path);
+         if (!f.exists()) //判断目录是否存在
+         {
+       //     System.out.println(path + " not exists");
+            return;
+         }
+         File fa[] = f.listFiles();
+         for (int i = 0; i < fa.length; i++)  			//遍历输出目录名
+         {
+            File fs = fa[i];
+            if (fs.isDirectory()) 
+            {
+      //         System.out.println(fs.getName() + " [目录]");			//判断是文件夹目录，还是文件
+            } 
+            else 
+           {
+      //          System.out.println(fs.getName());				//输出文件名
+   //             System.out.println(fs.getAbsolutePath());			//输出完整的绝对路径
+                photoRecognize(fs.getAbsolutePath(),fs.getAbsolutePath());
+           }
+        }
+     }
 	
 	
 	//用dos调用识别图片的方法
 	public static void photoRecognize(String ptotoPath,String txtPath){
 		Runtime rt = Runtime.getRuntime();
 		String cmddir = "tesseract"+ " "+ptotoPath+" "+txtPath+" "+ "-l chi_sim";    //完整的dos语句
-        System.out.println(cmddir);				//输出dos语句
+    //    System.out.println(cmddir);				//输出dos语句
         try {					
             rt.exec(cmddir);						//运行dos语句
-            System.out.println("成功执行！");
+     //       System.out.println("成功执行！");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,7 +124,7 @@ public class xm {
         try {
             FileOutputStream fos = new FileOutputStream(excelPath);
             workbook.write(fos);
-            System.out.println("写入成功");
+       //     System.out.println("写入成功");
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,15 +134,17 @@ public class xm {
 	
 
 	public static void main(String[] args) {
-		//photoRecognize("f:/4.png","f:/4");
-		
-		File file = new File("f:/4.txt");
-		String s[] =readLine("f:/4.txt");
-		writeToExcel(s,"f:/4.xls");
+		getFileName();
+		System.out.println("执行完毕");
+		//photoRecognize("f:/4.png","f:/4");				//识别图片
+			
+	/*	File file = new File("f:/4.txt");					
+		String s[] =readLine("f:/4.txt");				//读取
+		writeToExcel(s,"f:/4.xls");				//写入Excel
 		for(int i=0;i<s.length;i++)
 		{
 			System.out.println(s[i]);
-		}
+		}*/
 	/*	while(true) {
 			if(file.exists())
 			{
