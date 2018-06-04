@@ -72,7 +72,7 @@ public class GUI extends JFrame {
 		fileChooser.setCurrentDirectory(fsv.getHomeDirectory());
 		fileChooser.setDialogTitle("请选择要上传的文件...");
 		fileChooser.setApproveButtonText("确定");
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		result = fileChooser.showOpenDialog(contentPane);
 		if (JFileChooser.APPROVE_OPTION == result) {
 		    	   path=fileChooser.getSelectedFile().getPath();

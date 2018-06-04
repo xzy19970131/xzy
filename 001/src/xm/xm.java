@@ -21,7 +21,7 @@ public class xm {
 	 
 	 public static void getFileName() 
      {
-    	 String path = "C:\\Users\\lenovo\\Desktop\\myimg"; // 路径
+    	 String path = "C:\\Users\\lenovo\\Desktop\\66"; // 路径
         File f = new File(path);
          if (!f.exists()) //判断目录是否存在
          {
@@ -132,7 +132,7 @@ public class xm {
 	}
 	
 	
-
+ 
 	public static void main(String[] args) {
 		getFileName();
 		System.out.println("执行完毕");
