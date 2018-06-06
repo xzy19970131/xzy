@@ -17,7 +17,7 @@ public abstract class BaseDAOImp implements BaseDAO{
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			con = DriverManager.getConnection(url, username, password);
+			con = DriverManager.getConnection(url, userid, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -36,7 +36,7 @@ public abstract class BaseDAOImp implements BaseDAO{
 	public BaseDAOImp() {
 		try {
 			Class.forName(dirverClass);
-			con = DriverManager.getConnection(url, username, password);
+			con = DriverManager.getConnection(url, userid, password);
 			sta = con.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();

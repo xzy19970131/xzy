@@ -4,20 +4,28 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<!-- 配置字符集 -->
+	
 	<constant name="struts.DevMode" value="true"></constant>
 	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
 	
 	<!-- 处理有关用户的业务（配置你写好的后台组建，让struts识别它） -->
-	<package name="user" extends="struts-default" abstract="false"  namespace="/admin">
-		<action name="LoginAction" class="com.oracle.TeaMall.action.LoginAction">
-			<result name="success">/index.jsp</result>
-			<result name="failed">/failed.jsp</result>
+	<package name="user" extends="struts-default" abstract="false"  namespace="/admin" >		
+		<action name="UserAction"  class="com.oracle.TeaMall.action.UserAction"> 
+			<result name="success" type="redirect">/index.jsp</result>
+			<result name="fail">/login.jsp</result>
 		</action>
-		<action name="UserAction" class="com.oracle.TeaMall.action.UserAction">
+ 		<action name="OrderAction"  class="com.oracle.TeaMall.action.OrderAction"> 
+			<result name="a" type="redirect">/index.jsp</result>
+			<result name="b">/login.jsp</result>
+		</action> 
+ 		 <action name="UserAction" class="com.oracle.TeaMall.action.UserAction">
 			<result name="registerSuccess">/index.jsp</result>
 			<result name="registerFail">/index.jsp</result>
-			
 			<result name="listUserByPage">/index.jsp</result>
-		</action>
+		</action> 
 	</package>
+	
+	
+	
+	
 </struts>

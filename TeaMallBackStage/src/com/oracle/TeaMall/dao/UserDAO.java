@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import com.oracle.TeaMall.bean.User;
 
 public interface UserDAO extends BaseDAO {
-	public User  login(String username,String password);
+	public User  login(int userid,String password);
 	public  User getUserInfoByUserId(int userid);
-//	public boolean checkUserExsit(String username);
+//	public boolean checkUserExsit(String userid);
 	public ArrayList<User>  listUserByPage(int count,int page);
 //	public int  getAllCountOfUser();
-	public boolean changePasswd(String usernameByChange,String newPasswd);
+	public boolean changePasswd(String useridByChange,String newPasswd);
 	
 }

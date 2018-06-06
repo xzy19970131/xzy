@@ -20,7 +20,7 @@
 		<thead>
 			<tr>
 				<th data-options="field:'userid',width:110,align:'left'">用户账号</th>
-				<th data-options="field:'username',width:90,align:'left'">姓名</th>
+				<th data-options="field:'userid',width:90,align:'left'">姓名</th>
 				<th data-options="field:'nickname',width:110,align:'left'">昵称</th>
 				<th data-options="field:'sex',width:40,align:'left'">性别</th>
 				<th data-options="field:'age',width:40,align:'left'">年龄</th>

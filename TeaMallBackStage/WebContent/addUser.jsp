@@ -17,7 +17,7 @@
 		<thead>
 			<tr>
 				<th data-options="field:'userid',width:33%,align:'left'">用户编号</th>
-				<th data-options="field:'username',width:33%,align:'left'">用户名</th>
+				<th data-options="field:'userid',width:33%,align:'left'">用户名</th>
 				<th data-options="field:'nickname',width:34%,align:'left'">密码</th>
 			</tr>
 		</thead>

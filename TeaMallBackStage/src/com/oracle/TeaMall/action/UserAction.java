@@ -22,7 +22,30 @@ import com.oracle.TeaMall.util.Responser;
 public class UserAction  implements RequestAware{
 	private Map<String,Object>  request=new HashMap<>();
 	private  User  u;
+	private int userid;
+	private String password;
+	private  UserDAO  dao;
+	private int page;
+	private int rows;
 	
+	
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public User getU() {
 		return u;
 	}
@@ -30,9 +53,7 @@ public class UserAction  implements RequestAware{
 	public void setU(User u) {
 		this.u = u;
 	}
-	private  UserDAO  dao;
-	private int page;
-	private int rows;
+
 	
 	public int getPage() {
 		return page;
@@ -57,10 +78,10 @@ public class UserAction  implements RequestAware{
 	 * 添加用户
 	 */
 	public String add() {
-		String username =u.getUsername();
+		int userid =u.getUserid();
 		String password =u.getPassword();
 		User user=new User();
-		user.setUsername(username);
+		user.setUserid(userid);
 		user.setPassword(MD5.MD5(password));//在将表单提交过来的密码风涨到user对象前，先用md5算法把密码加密
 		boolean  result=dao.add(user);
 		
@@ -83,7 +104,7 @@ public class UserAction  implements RequestAware{
 			try {
 				JSONObject  j=new JSONObject();
 				j.put("userid", u.getUserid());
-				j.put("username", u.getUsername());
+				j.put("userid", u.getUserid());
 				j.put("sex",(u.getSex()==0)?"男":"女");
 				j.put("age", u.getAge());
 				j.put("job", u.getJob());
@@ -108,7 +129,33 @@ public class UserAction  implements RequestAware{
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/**
+	 * 处理登陆的业务方法
+	 * @return
+	 */
 
+	public String   login() {
+		System.out.println("进UserAction");
+		System.out.println(userid+password);
+		User u=dao.login(userid, MD5.MD5(password));
+		System.out.println("resultUser:"+u);
+		if(u!=null) {
+			ServletActionContext.getRequest().getSession().setAttribute("user", u);
+			System.out.println("success");
+			return "success";
+		}else
+		{		System.out.println("fail");
+			return "fail";
+		}
+	}
+	
+	public String   sss() {
+		System.out.println("sssss");
+		return "s";
+
+	}
 	@Override
 	public void setRequest(Map<String, Object> arg0) {
 		this.request=arg0;

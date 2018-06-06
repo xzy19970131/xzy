@@ -1,9 +1,14 @@
 package com.oracle.TeaMall.dao;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javax.sql.DataSource;
 
 import com.oracle.TeaMall.bean.User;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
@@ -11,6 +16,12 @@ import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 
 public class UserDAOImp extends BaseDAOImp implements UserDAO {
+	
+	private Connection con;
+	private Statement sta;
+	private PreparedStatement  preSta;
+	private CallableStatement  callSta;
+	private DataSource  dataSource;//定义一个连接池对象，这个对象是用来缓存若干个连接的一个‘集合’
 	/**
 	 * 添加用户
 	 */
@@ -21,7 +32,7 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 		Statement sta=null;
 		try {
 			sta=getSta();
-			int count=sta.executeUpdate("insert into  user2(userid,username,password)   values(null,'"+user.getUsername()+"','"+user.getPassword()+"')");
+			int count=sta.executeUpdate("insert into  user2(userid,userid,password)   values(null,'"+user.getUserid()+"','"+user.getPassword()+"')");
 			//由于userID列不能为空，所以在这里用一个变量的值来填充，后面为保证userid按顺序增加，将rownum的值赋给它
 			result=(count>0)?true:false;
 		} catch (Exception e) {
@@ -44,8 +55,8 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 		PreparedStatement  preSta=null;
 		int result=0;
 		try {
-			  preSta=getPreSta("update user2 set username=? ,nickname=?,sex=?,age=?,image=?,job=?,jialing=?,email=?,tel=?,jianjie=? where userid=?");
-			  preSta.setString(1, u.getUsername());
+			  preSta=getPreSta("update user2 set userid=? ,nickname=?,sex=?,age=?,image=?,job=?,jialing=?,email=?,tel=?,jianjie=? where userid=?");
+			  preSta.setInt(1, u.getUserid());
 			  preSta.setString(2, u.getNickname());
 			  preSta.setInt(3, u.getSex());;
 			  preSta.setInt(4, u.getAge());;
@@ -63,9 +74,13 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 		return result>0?true:false;
 	}
 
-	private PreparedStatement getPreSta(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public PreparedStatement getPreSta(String sql) {
+		try {
+			preSta=getCon().prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return preSta;
 	}
 
 	@Override
@@ -75,13 +90,14 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 	}
 
 	@Override
-	public User login(String username, String password) {
+	public User login(int userid, String password) {
+		System.out.println("UserDaoImp中："+userid+password);
 		User  user=null;
 		PreparedStatement  sta=null;
 		ResultSet rs=null;
 		try {
-			sta=getPreSta("select *  from user2 where username=? and password=?");
-			sta.setString(1, username);
+			sta=getPreSta("select *  from user2 where userid=? and password=?");
+			sta.setInt(1, userid);
 			sta.setString(2, password);
 			rs=sta.executeQuery();
 			if(rs.next()) {
@@ -92,7 +108,8 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 				user.setPassword(rs.getString("password"));
 				user.setSex(rs.getInt("sex"));
 				user.setUserid(rs.getInt("userid"));
-				user.setUsername(rs.getString("username"));
+				System.out.println("出UserDaoImp");
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,7 +129,6 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 			if(rs.next()) {
 				user=new User();
 				user.setUserid(rs.getInt("userid"));
-				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
 				if(rs.getString("image")!=null)
 				{
@@ -122,7 +138,7 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 					user.setPassword(rs.getString("password"));
 					user.setSex(rs.getInt("sex"));
 					user.setUserid(rs.getInt("userid"));
-					user.setUsername(rs.getString("username"));
+		
 				}
 			}
 		} catch (Exception e) {
@@ -132,13 +148,13 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 		}
 
 	@Override
-	public boolean changePasswd(String usernameByChange,String newPasswd) {
+	public boolean changePasswd(String useridByChange,String newPasswd) {
 		String password=newPasswd;
-		String username=usernameByChange;
+		String userid=useridByChange;
 		ResultSet rs = null;
 		int result=0;
 		try {
-			result=getSta().executeUpdate("UPDATE USER2 SET PASSWORD='"+password+"' WHERE USERNAME='"+username+"'");
+			result=getSta().executeUpdate("UPDATE USER2 SET PASSWORD='"+password+"' WHERE userid='"+userid+"'");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -160,7 +176,7 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 			while(rs.next()) {
 				User  user=new User();
 				user.setUserid(rs.getInt("userid"));
-				user.setUsername(rs.getString("username"));
+			
 				user.setPassword(rs.getString("password"));
 				if(rs.getString("image")!=null)
 				{

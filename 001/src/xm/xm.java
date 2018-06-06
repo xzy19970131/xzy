@@ -15,17 +15,17 @@ import md.readLine;
 
 
 public class xm {
-	 static String[] s;
+	 static String[] neirong;
 	 
 	 
 	 
-	 public static void getFileName() 
+	 public static void getFileName(int order) 
      {
-    	 String path = "C:\\Users\\lenovo\\Desktop\\66"; // 路径
+    	 String path = "C:\\Users\\lenovo\\Desktop\\my"; // 路径
         File f = new File(path);
          if (!f.exists()) //判断目录是否存在
          {
-       //     System.out.println(path + " not exists");
+            System.out.println(path + " not exists");
             return;
          }
          File fa[] = f.listFiles();
@@ -34,14 +34,31 @@ public class xm {
             File fs = fa[i];
             if (fs.isDirectory()) 
             {
-      //         System.out.println(fs.getName() + " [目录]");			//判断是文件夹目录，还是文件
+               System.out.println(fs.getName() + " [目录]");			//判断是文件夹目录，还是文件
             } 
             else 
            {
-      //          System.out.println(fs.getName());				//输出文件名
-   //             System.out.println(fs.getAbsolutePath());			//输出完整的绝对路径
-                photoRecognize(fs.getAbsolutePath(),fs.getAbsolutePath());
-           }
+            	if(order==1) {
+            		System.out.println(fs.getName());				//输出文件名
+            		System.out.println(fs.getAbsolutePath());			//输出完整的绝对路径
+            		photoRecognize(fs.getAbsolutePath(),(String) fs.getAbsolutePath().subSequence(0, fs.getAbsolutePath().length()-4));    //去掉.png
+            	}
+            	if(order==2) 
+            	{
+            		//System.out.println(fs.getName());				//输出文件名
+            	//	System.out.println(fs.getAbsolutePath());			//输出完整的绝对路径
+            		if(fs.getAbsolutePath().contains(".txt")) 
+            		{
+	            		File file = new File(fs.getAbsolutePath());					
+	            		String neirong[] =readLine(fs.getAbsolutePath());				//读取
+	            		writeToExcel(neirong,(String) fs.getAbsolutePath().subSequence(0, fs.getAbsolutePath().length()-3)+"xls");				//写入Excel
+	            		for(int j=0;j<neirong.length;j++)
+	            		{
+	            			System.out.println(neirong[j]);
+	            		}
+            		}
+            	}
+            }
         }
      }
 	
@@ -67,14 +84,14 @@ public class xm {
 	    String tempString = null;
 	    int line =1;
 	    try {
-	    	s= new String[2];
+	    	neirong= new String[2];
 	    
 	    	int i=0;
 	      //  System.out.println("以行为单位读取文件内容，一次读一整行：");
 	        reader = new BufferedReader(new FileReader(file));
 	        while ((tempString = reader.readLine()) != null) {
 	        	if(!tempString.equals("")) {
-	        		s[i]=tempString;
+	        		neirong[i]=tempString;
 	        //    System.out.println(tempString);
 	            i++;
 	            line ++ ;}
@@ -92,7 +109,7 @@ public class xm {
 	            }
 	        }
 	    }
-		return s;
+		return neirong;
 	}
 	
 	//把数据写入到Excel        第一个参数是要写入的数据，第二个是生成Excel的路径
@@ -134,13 +151,17 @@ public class xm {
 	
  
 	public static void main(String[] args) {
-		getFileName();
-		System.out.println("执行完毕");
+//		getFileName(1);
+		getFileName(2);							//最后
+	//	System.out.println("执行完毕");*/
+		
+		
+		
 		//photoRecognize("f:/4.png","f:/4");				//识别图片
 			
-	/*	File file = new File("f:/4.txt");					
-		String s[] =readLine("f:/4.txt");				//读取
-		writeToExcel(s,"f:/4.xls");				//写入Excel
+/*		File file = new File("C:\\Users\\lenovo\\Desktop\\my\\50.txt");					
+		String s[] =readLine("C:\\Users\\lenovo\\Desktop\\my\\50.txt");				//读取
+		writeToExcel(s,"C:\\Users\\lenovo\\Desktop\\my/50.xls");				//写入Excel
 		for(int i=0;i<s.length;i++)
 		{
 			System.out.println(s[i]);

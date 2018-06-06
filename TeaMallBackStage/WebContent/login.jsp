@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base  href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}/TeaMallBackStage/">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
@@ -15,7 +16,8 @@
 <body>
 
 	<div class="easyui-panel" title="用户登录" style="width:100%;max-width:400px;padding:30px 60px;">
-		<form id="ff"  action="LoginAction.action" method="post">
+	
+		<form id="ff"  action="admin/UserAction!login.action" method="post">
 			<div style="margin-bottom:20px">
 				<input class="easyui-textbox" name="userid" style="width:100%" data-options="label:'用户名:',required:true">
 			</div>
