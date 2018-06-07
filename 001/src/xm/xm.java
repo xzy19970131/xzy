@@ -16,12 +16,23 @@ import md.readLine;
 
 public class xm {
 	 static String[] neirong;
-	 
+     //第一步，创建一个workbook对应一个excel文件
+     static HSSFWorkbook workbook = new HSSFWorkbook();
+     static //第二部，在workbook中创建一个sheet对应excel中的sheet
+     HSSFSheet sheet = workbook.createSheet("软件杯");
+     //第三部，在sheet表中添加表头第0行，老版本的poi对sheet的行列有限制
+     static HSSFRow row = sheet.createRow(0);
+     static //第四步，创建单元格，设置表头
+     HSSFCell cell = row.createCell(0); 
+ 
+     
+
+
 	 
 	 
 	 public static void getFileName(int order) 
      {
-    	 String path = "C:\\Users\\lenovo\\Desktop\\my"; // 路径
+    	 String path = "C:\\Users\\lenovo\\Desktop\\6666"; // 路径
         File f = new File(path);
          if (!f.exists()) //判断目录是否存在
          {
@@ -38,11 +49,16 @@ public class xm {
             } 
             else 
            {
-            	if(order==1) {
+            	if(order==1) 
+            	{
+            		if(fs.getAbsolutePath().contains(".png")||fs.getAbsolutePath().contains(".jpg")) 
+            		{
             		System.out.println(fs.getName());				//输出文件名
             		System.out.println(fs.getAbsolutePath());			//输出完整的绝对路径
             		photoRecognize(fs.getAbsolutePath(),(String) fs.getAbsolutePath().subSequence(0, fs.getAbsolutePath().length()-4));    //去掉.png
-            	}
+            	
+            		}
+            	}	
             	if(order==2) 
             	{
             		//System.out.println(fs.getName());				//输出文件名
@@ -51,15 +67,22 @@ public class xm {
             		{
 	            		File file = new File(fs.getAbsolutePath());					
 	            		String neirong[] =readLine(fs.getAbsolutePath());				//读取
-	            		writeToExcel(neirong,(String) fs.getAbsolutePath().subSequence(0, fs.getAbsolutePath().length()-3)+"xls");				//写入Excel
+	            		writeToExcel(neirong,i/2);				//写入Excel
 	            		for(int j=0;j<neirong.length;j++)
 	            		{
 	            			System.out.println(neirong[j]);
 	            		}
+	            	//	 writeOut((String) fs.getAbsolutePath().subSequence(0, fs.getAbsolutePath().length()-3)+"xls");
             		}
+            		
             	}
+            
             }
         }
+         cell.setCellValue("企业注册号");
+         cell = row.createCell(1);
+         cell.setCellValue("企业名称");
+         writeOut("C:\\Users\\lenovo\\Desktop\\xzy.xls");
      }
 	
 	
@@ -91,7 +114,15 @@ public class xm {
 	        reader = new BufferedReader(new FileReader(file));
 	        while ((tempString = reader.readLine()) != null) {
 	        	if(!tempString.equals("")) {
-	        		neirong[i]=tempString;
+	        		if(i==0) 
+	        		{
+	        		neirong[i]= (String) tempString.subSequence(8,tempString.length());
+	        		}
+	        		if(i==1) 
+	        		{
+		        	neirong[i]=(String) tempString.subSequence(7, tempString.length());
+		        	}
+		        		
 	        //    System.out.println(tempString);
 	            i++;
 	            line ++ ;}
@@ -113,31 +144,21 @@ public class xm {
 	}
 	
 	//把数据写入到Excel        第一个参数是要写入的数据，第二个是生成Excel的路径
-	static void writeToExcel(String num[],String excelPath){
-	readLine readLine = new readLine();
-    	
-        //第一步，创建一个workbook对应一个excel文件
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        //第二部，在workbook中创建一个sheet对应excel中的sheet
-        HSSFSheet sheet = workbook.createSheet("用户表一");
-        //第三部，在sheet表中添加表头第0行，老版本的poi对sheet的行列有限制
-        HSSFRow row = sheet.createRow(0);
-        //第四步，创建单元格，设置表头
-        HSSFCell cell = row.createCell(0);
-        cell.setCellValue("企业注册号");
-        cell = row.createCell(1);
-        cell.setCellValue("企业名称");
+	static void writeToExcel(String num[],int i){
+
 
         //第五步，写入实体数据，实际应用中这些数据从数据库得到,对象封装数据，集合包对象。对象的属性值对应表的每行的值
-        for (int i = 0; i <1; i++) {
+     
             HSSFRow row1 = sheet.createRow(i + 1);
    
             //创建单元格设值
             row1.createCell(0).setCellValue(num[0]);
             row1.createCell(1).setCellValue(num[1]);
-        }
+        
 
-        //将文件保存到指定的位置
+	}
+	static void writeOut(String excelPath){
+	    //将文件保存到指定的位置
         try {
             FileOutputStream fos = new FileOutputStream(excelPath);
             workbook.write(fos);
@@ -146,12 +167,12 @@ public class xm {
         } catch (IOException e) {
             e.printStackTrace();
         }
+		
 	}
-	
 	
  
 	public static void main(String[] args) {
-//		getFileName(1);
+	//getFileName(1);
 		getFileName(2);							//最后
 	//	System.out.println("执行完毕");*/
 		
