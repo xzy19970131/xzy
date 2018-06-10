@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class User implements Serializable{
 	private int userid;
-
+	private String username;
 	private String password;
 	private String nickname;
 	private int age;
@@ -16,6 +16,12 @@ public class User implements Serializable{
 	private String tel;
 	private String jianjie;
 	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getJianjie() {
 		return jianjie;
 	}
@@ -86,12 +92,17 @@ public class User implements Serializable{
 	public User() {
 		super();
 	}
-	
-	public User(int userid, String password, String nickname, int age, int sex, String image,
-			String job, int jialing, String email, String tel) {
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", username=" + username + ", password=" + password + ", nickname=" + nickname
+				+ ", age=" + age + ", sex=" + sex + ", image=" + image + ", job=" + job + ", jialing=" + jialing
+				+ ", email=" + email + ", tel=" + tel + ", jianjie=" + jianjie + "]";
+	}
+	public User(int userid, String username, String password, String nickname, int age, int sex, String image,
+			String job, int jialing, String email, String tel, String jianjie) {
 		super();
-
 		this.userid = userid;
+		this.username = username;
 		this.password = password;
 		this.nickname = nickname;
 		this.age = age;
@@ -101,11 +112,10 @@ public class User implements Serializable{
 		this.jialing = jialing;
 		this.email = email;
 		this.tel = tel;
+		this.jianjie = jianjie;
 	}
-	@Override
-	public String toString() {
-		return "User [userid=" + userid + ", userid=" + userid + ", password=" + password + ", nickname=" + nickname
-				+ ", age=" + age + ", sex=" + sex + ", image=" + image + ", job=" + job + ", jialing=" + jialing
-				+ ", email=" + email + ", tel=" + tel+ ", jianjie=" + jianjie + "]";
-	}
+	
+	
+
+
 }

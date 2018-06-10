@@ -16,11 +16,11 @@
 <!-- rownumbers:true,pagination:true, -->
 <body style="margin: 0px;padding: 5px;">
 	<table class="easyui-datagrid" id="dg" title="用户列表" style="width:100%;height:400px;margin: 0px;"
-			data-options="singleSelect:true,collapsible:true,url:'admin/UserAction!listUserByPage.action?rows=5&page=1',method:'get'">
+			data-options="singleSelect:true,collapsible:true,url:'admin/UserAction!listUserByPage.action?rows=3&page=1',method:'get'">
 		<thead>
 			<tr>
 				<th data-options="field:'userid',width:110,align:'left'">用户账号</th>
-				<th data-options="field:'userid',width:90,align:'left'">姓名</th>
+				<th data-options="field:'username',width:90,align:'left'">姓名</th>
 				<th data-options="field:'nickname',width:110,align:'left'">昵称</th>
 				<th data-options="field:'sex',width:40,align:'left'">性别</th>
 				<th data-options="field:'age',width:40,align:'left'">年龄</th>

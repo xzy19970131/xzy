@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class read {
 	String s[];
-	void readLine(String s2){
+	public void readLine(String s2){
 	    File file = new File(s2);
 	    BufferedReader reader = null;
 	    String tempString = null;

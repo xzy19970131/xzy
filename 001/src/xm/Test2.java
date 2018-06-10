@@ -1,4 +1,7 @@
 package xm;
+
+import xzy.read;
+
 /*svm*/
 public class Test2 {
 

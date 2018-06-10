@@ -5,7 +5,7 @@ public class LoginAction {
 	private String userid;
 	private String password;
 	
-	public String getUserid() {
+	public String getUserid() {   
 		return userid;
 	}
 	public void setUserid(String userid) {
@@ -20,7 +20,6 @@ public class LoginAction {
 	public String execute() {
 		System.out.println(userid+password);
 		if(userid.equals("admin")&&password.equals("admin")) {
-			System.out.println("sss");
 			return "success";
 		}else {
 			return "failed";

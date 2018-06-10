@@ -30,9 +30,9 @@ public class xm {
 
 	 
 	 
-	 public static void getFileName(int order) 
+	 public static void one() 
      {
-    	 String path = "C:\\Users\\lenovo\\Desktop\\6666"; // 路径
+    	 String path = "C:\\Users\\lenovo\\Desktop\\666"; // 路径
         File f = new File(path);
          if (!f.exists()) //判断目录是否存在
          {
@@ -49,8 +49,6 @@ public class xm {
             } 
             else 
            {
-            	if(order==1) 
-            	{
             		if(fs.getAbsolutePath().contains(".png")||fs.getAbsolutePath().contains(".jpg")) 
             		{
             		System.out.println(fs.getName());				//输出文件名
@@ -58,9 +56,84 @@ public class xm {
             		photoRecognize(fs.getAbsolutePath(),(String) fs.getAbsolutePath().subSequence(0, fs.getAbsolutePath().length()-4));    //去掉.png
             	
             		}
-            	}	
-            	if(order==2) 
+       
+           }
+
+     }
+    }
+	 
+	 
+	 public static void two() 
+     {
+    	 String path = "C:\\Users\\lenovo\\Desktop\\666"; // 路径
+        File f = new File(path);
+         if (!f.exists()) //判断目录是否存在
+         {
+            System.out.println(path + " not exists");
+            return;
+         }
+         File fa[] = f.listFiles();
+         for (int i = 0; i < fa.length; i++)  			//遍历输出目录名
+         {
+            File fs = fa[i];
+            if (fs.isDirectory()) 
+            {
+               System.out.println(fs.getName() + " [目录]");			//判断是文件夹目录，还是文件
+            } 
+            else 
+           {
+            	
+            
+            	if(fs.getAbsolutePath().contains("txt")) 
             	{
+            		File file = new File(fs.getAbsolutePath());	
+            		while(true) 
+            		{
+            			System.out.println("等");
+            			if(file.exists()&&file.length()>1)
+            			{
+            				System.out.println("出来了");
+	
+        	            		String neirong[] =readLine(fs.getAbsolutePath());				//读取
+        	            		writeToExcel(neirong,i/2);				//写入Excel
+        	            		for(int j=0;j<neirong.length;j++)
+        	            		{
+        	            			System.out.println(neirong[j]);
+        	            		}
+        	            	//	 writeOut((String) fs.getAbsolutePath().subSequence(0, fs.getAbsolutePath().length()-3)+"xls");
+               
+            				break;
+            			}
+            		}
+            
+            	}
+           }
+
+     }
+    }
+	
+	 public static void three() 
+     {
+    	 String path = "C:\\Users\\lenovo\\Desktop\\666"; // 路径
+        File f = new File(path);
+         if (!f.exists()) //判断目录是否存在
+         {
+            System.out.println(path + " not exists");
+            return;
+         }
+         File fa[] = f.listFiles();
+         for (int i = 0; i < fa.length; i++)  			//遍历输出目录名
+         {
+            File fs = fa[i];
+            if (fs.isDirectory()) 
+            {
+               System.out.println(fs.getName() + " [目录]");			//判断是文件夹目录，还是文件
+            } 
+            else 
+           {
+            		
+             
+            	
             		//System.out.println(fs.getName());				//输出文件名
             	//	System.out.println(fs.getAbsolutePath());			//输出完整的绝对路径
             		if(fs.getAbsolutePath().contains(".txt")) 
@@ -75,15 +148,13 @@ public class xm {
 	            	//	 writeOut((String) fs.getAbsolutePath().subSequence(0, fs.getAbsolutePath().length()-3)+"xls");
             		}
             		
-            	}
-            
-            }
-        }
-         cell.setCellValue("企业注册号");
-         cell = row.createCell(1);
-         cell.setCellValue("企业名称");
-         writeOut("C:\\Users\\lenovo\\Desktop\\xzy.xls");
+            	
+          
+           }
+
      }
+    }
+	
 	
 	
 	//用dos调用识别图片的方法
@@ -172,25 +243,34 @@ public class xm {
 	
  
 	public static void main(String[] args) {
-	//getFileName(1);
-		getFileName(2);							//最后
-	//	System.out.println("执行完毕");*/
+		one();
+		two();
+		three();							//最后
+        cell.setCellValue("企业注册号");
+        cell = row.createCell(1);
+        cell.setCellValue("企业名称");
+        writeOut("C:\\Users\\lenovo\\Desktop\\xzy.xls");
+		System.out.println("执行完毕");
 		
 		
 		
-		//photoRecognize("f:/4.png","f:/4");				//识别图片
-			
-/*		File file = new File("C:\\Users\\lenovo\\Desktop\\my\\50.txt");					
-		String s[] =readLine("C:\\Users\\lenovo\\Desktop\\my\\50.txt");				//读取
-		writeToExcel(s,"C:\\Users\\lenovo\\Desktop\\my/50.xls");				//写入Excel
-		for(int i=0;i<s.length;i++)
+		//photoRecognize("C:\\Users\\lenovo\\Desktop\\666\\2.png","C:\\Users\\lenovo\\Desktop\\666\\2.png");				//识别图片
+					
+		//String s[] =readLine("C:\\Users\\lenovo\\Desktop\\666\\2.txt");				//读取
+		//writeToExcel(s,"C:\\Users\\lenovo\\Desktop\\my/50.xls");				//写入Excel
+		/*for(int i=0;i<s.length;i++)
 		{
 			System.out.println(s[i]);
 		}*/
-	/*	while(true) {
-			if(file.exists())
+		
+		
+	/*	File file = new File("C:\\Users\\lenovo\\Desktop\\666\\2.png.txt");	
+		while(true) {
+			System.out.println("等");
+			if(file.exists()&&file.length()>0)
 			{
-				readLine("f:/4.txt");
+				System.out.println("出来了");
+				readLine("C:\\Users\\lenovo\\Desktop\\666\\2.png.txt");
 				break;
 			}
 		}*/

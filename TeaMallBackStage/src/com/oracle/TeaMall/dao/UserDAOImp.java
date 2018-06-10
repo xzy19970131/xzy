@@ -44,8 +44,16 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 	 */
 	@Override
 	public boolean delete(Object id) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result=false;
+		Statement sta=null;
+		try {
+			sta=getSta();
+			int count=sta.executeUpdate("delete from  user2 where userid ="+id);
+			//由于userID列不能为空，所以在这里用一个变量的值来填充，后面为保证userid按顺序增加，将rownum的值赋给它
+			result=(count>0)?true:false;
+		} catch (Exception e) {
+		}
+		return result;
 	}
 	/**
 	 * 修改用户
@@ -176,10 +184,11 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 			while(rs.next()) {
 				User  user=new User();
 				user.setUserid(rs.getInt("userid"));
-			
 				user.setPassword(rs.getString("password"));
 				if(rs.getString("image")!=null)
 				{
+					user.setUsername(rs.getString("username"));
+					user.setUserid(rs.getInt("userid"));
 					user.setAge(rs.getInt("age"));
 					user.setImage(rs.getString("image"));
 					user.setNickname(rs.getString("nickname"));

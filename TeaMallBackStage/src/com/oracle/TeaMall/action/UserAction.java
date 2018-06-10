@@ -27,8 +27,17 @@ public class UserAction  implements RequestAware{
 	private  UserDAO  dao;
 	private int page;
 	private int rows;
+	private int i;
 	
 	
+
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
 
 	public int getUserid() {
 		return userid;
@@ -93,6 +102,18 @@ public class UserAction  implements RequestAware{
 			return "registerFail";
 		}
 	}
+	public String del(int userid) {
+		System.out.println("进了del");
+		boolean  result=dao.delete(userid);;
+		
+		
+		if(result) {
+			return "registerSuccess";
+		}else
+		{
+			return "registerFail";
+		}
+	}
 	/**
 	 * 分页加载用户资料
 	 */
@@ -103,8 +124,9 @@ public class UserAction  implements RequestAware{
 		{
 			try {
 				JSONObject  j=new JSONObject();
+				
 				j.put("userid", u.getUserid());
-				j.put("userid", u.getUserid());
+				j.put("username", u.getUsername());
 				j.put("sex",(u.getSex()==0)?"男":"女");
 				j.put("age", u.getAge());
 				j.put("job", u.getJob());
@@ -151,8 +173,10 @@ public class UserAction  implements RequestAware{
 		}
 	}
 	
-	public String   sss() {
-		System.out.println("sssss");
+	public String  sss() {
+		System.out.println("oooo");
+		System.out.println(i);	
+		System.out.println("ppppp");
 		return "s";
 
 	}
