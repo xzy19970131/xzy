@@ -102,16 +102,16 @@ public class UserAction  implements RequestAware{
 			return "registerFail";
 		}
 	}
-	public String del(int userid) {
+	public String del() {
 		System.out.println("进了del");
-		boolean  result=dao.delete(userid);;
-		
-		
+		System.out.println(userid);
+		boolean  result=dao.delete(userid);
 		if(result) {
-			return "registerSuccess";
+			System.out.println("result      ttt");
+			return "delSuccess";
 		}else
-		{
-			return "registerFail";
+		{		System.out.println("result      ttt");
+			return "delFail";
 		}
 	}
 	/**

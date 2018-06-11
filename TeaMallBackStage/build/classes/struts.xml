@@ -13,8 +13,8 @@
 		<action name="UserAction"  class="com.oracle.TeaMall.action.UserAction"> 
 			<result name="success" type="redirect">/index.jsp</result>
 			<result name="fail">/login.jsp</result>
-			<result name="registerSuccess">/index.jsp</result>
-			<result name="registerFail">/index.jsp</result>
+			<result name="delSuccess">/index.jsp</result>
+			<result name="delFail">/index.jsp</result>
 			<result name="listUserByPage">/index.jsp</result>
 			<result name="s">/index.jsp</result>
 		</action>

@@ -14,7 +14,7 @@
 </head>
 <body>
  		
-<form id="ff" method="post" action="admin/UserAction!del.action">
+<form id="ff" method="post" >
 <!-- <input  type="hidden"  name=i  value="5"/> -->   <!-- 直接在后面用问号也可以，用hidden也可以 -->
 			<div style="margin-bottom:20px">
 				输入要删除用户的ID<input class="easyui-textbox"  id="userid" name="name" style="width:350px" data-options="label:'Name:',required:true">
@@ -22,17 +22,33 @@
 	
 		</form>
 <div style="text-align:center;padding:5px 0">
-			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" style="width:80px" name="Submit" >Submit</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
 		</div>
 	<script>
-		function submitForm(){
-			var userid=document.getElementById("userid").value;
+	
+ 	$("[name='Submit']").click(function(){  //焦点失去事件           
+ 	//	alert($("#userid").val());
+  	 	$.get("admin/UserAction!del.action?userid="+$("#userid").val(),function(data,status){     //结果直接映射在data和status里面
+	 		alert($("#userid").val());
+			if(data=='true')
+			{
+				alert("t");
+				   //htnl里面写html代码
+			}else{
+				alert("f");
+			 
+			}
+			
+		});  
+	}) 
+			/*  var userid=document.getElementById("userid").value;
 			alert(userid);
 			//$("#ff").submit();
-			$('#ff').form('submit');
-		}
+			$('#ff').form('submit');  */
+	
 		function clearForm(){
+				alert("996");
 			$('#ff').form('clear');
 		}
 	</script>
