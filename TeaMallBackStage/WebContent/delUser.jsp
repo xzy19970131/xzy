@@ -30,13 +30,12 @@
  	$("[name='Submit']").click(function(){  //焦点失去事件           
  	//	alert($("#userid").val());
   	 	$.get("admin/UserAction!del.action?userid="+$("#userid").val(),function(data,status){     //结果直接映射在data和status里面
-	 		alert($("#userid").val());
-			if(data=='true')
+			if(data=='delSuccess')
 			{
-				alert("t");
+				alert("成功删除UserID为"+$("#userid").val()+"的用户");
 				   //htnl里面写html代码
 			}else{
-				alert("f");
+				alert("删除失败");
 			 
 			}
 			
@@ -48,7 +47,7 @@
 			$('#ff').form('submit');  */
 	
 		function clearForm(){
-				alert("996");
+			
 			$('#ff').form('clear');
 		}
 	</script>

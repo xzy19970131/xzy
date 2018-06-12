@@ -17,24 +17,33 @@
 <body>
 	<form id="ff" method="post">
 			<div style="margin-bottom:20px">
-				账号<input class="easyui-textbox" name="userid" style="width:300px" data-options="label:'Name:',required:true">
+				<input class="easyui-textbox" name="userid" style="width:300px" data-options="label:'UserID:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
-				密码<input class="easyui-textbox" name="password" style="width:300px" data-options="label:'Email:',required:true,validType:'email'">
+				<input class="easyui-textbox" name="password" style="width:300px" data-options="label:'Password:'">
 			</div>
 			<div style="margin-bottom:20px">
-				姓名<input class="easyui-textbox" name="username" style="width:300px" data-options="label:'Subject:',required:true">
+				<input class="easyui-textbox" name="username" style="width:300px" data-options="label:'UserName:'">
 			</div>
 		
 		</form>
 <div style="text-align:left;padding:5px 0">
-			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" name="Submit" style="width:80px">Submit</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
 		</div>
 <script>
-		function submitForm(){
-			$('#ff').form('submit');
-		}
+$("[name='Submit']").click(function(){  //焦点失去事件           
+/* alert("222") */
+ 	$.get("admin/UserAction!update.action?userid="+$("#userid")&password=$("#password")&username=$("#username"),function(data,status){     //结果直接映射在data和status里面
+
+		/* if(data=='true')
+		{
+			$("#userExist").html("<b style='color:green'>√</b>");    //htnl里面写html代码
+		}else{
+			$("#userExist").html("<b style='color:red'>X</b>");
+		} */
+	}); 
+})
 		function clearForm(){
 			$('#ff').form('clear');
 		}

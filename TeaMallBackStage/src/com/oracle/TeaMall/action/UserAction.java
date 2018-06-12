@@ -1,15 +1,22 @@
 package com.oracle.TeaMall.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.filters.AddDefaultCharsetFilter.ResponseWrapper;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
+import com.mysql.fabric.Response;
 import com.oracle.TeaMall.bean.User;
 import com.oracle.TeaMall.dao.UserDAO;
 import com.oracle.TeaMall.dao.UserDAOImp;
@@ -102,17 +109,51 @@ public class UserAction  implements RequestAware{
 			return "registerFail";
 		}
 	}
-	public String del() {
+	public void del() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+        HttpServletResponse response = ServletActionContext.getResponse();
 		System.out.println("进了del");
 		System.out.println(userid);
 		boolean  result=dao.delete(userid);
+		PrintWriter w = response.getWriter();
 		if(result) {
 			System.out.println("result      ttt");
-			return "delSuccess";
+			w.write("delSuccess");
+			//return "delSuccess";
 		}else
-		{		System.out.println("result      ttt");
-			return "delFail";
+		{		System.out.println("result      fff");
+			w.write("delFail");
+			//return "delFail";
 		}
+	}
+	
+	
+	public String update() {
+		
+	
+		
+		
+		System.out.println("进了update");
+		System.out.println(userid);
+	//	boolean  result=dao.update(o);
+	/*	try {
+			  preSta=getPreSta("update user2 set userid=? ,nickname=?,sex=?,age=?,image=?,job=?,jialing=?,email=?,tel=?,jianjie=? where userid=?");
+			  preSta.setInt(1, u.getUserid());
+			  preSta.setString(2, u.getNickname());
+			  preSta.setInt(3, u.getSex());;
+			  preSta.setInt(4, u.getAge());;
+			  preSta.setString(5, u.getImage());
+			  preSta.setString(6, u.getJob());
+			  preSta.setInt(7, u.getJialing());
+			  preSta.setString(8, u.getEmail());
+			  preSta.setString(9, u.getTel());
+			  preSta.setString(10, u.getJianjie());
+			  preSta.setInt(11, u.getUserid());
+			  result=preSta.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		return "s";
 	}
 	/**
 	 * 分页加载用户资料
