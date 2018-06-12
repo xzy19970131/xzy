@@ -34,14 +34,14 @@
 <script>
 $("[name='Submit']").click(function(){  //焦点失去事件           
 /* alert("222") */
- 	$.get("admin/UserAction!update.action?userid="+$("#userid")&password=$("#password")&username=$("#username"),function(data,status){     //结果直接映射在data和status里面
-
-		/* if(data=='true')
+ 	$.get("admin/UserAction!update.action?userid="+$("[name='userid']").val()+"&password="+$("[name='password']").val()+"&username="+$("[name='username']").val(),function(data,status){     //结果直接映射在data和status里面
+ 	/* 	"admin/UserAction!add.action?acount="+text+"&password="+password */
+		 if(data=='updateSuccess')
 		{
-			$("#userExist").html("<b style='color:green'>√</b>");    //htnl里面写html代码
+			alert("修改成功")
 		}else{
-			$("#userExist").html("<b style='color:red'>X</b>");
-		} */
+			alert("修改失败")
+		} 
 	}); 
 })
 		function clearForm(){

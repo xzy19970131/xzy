@@ -17,5 +17,5 @@ public interface BaseDAO {
 	
 	public boolean update(Object  o);
 	
-	public Object  list();
+	//public Object  list();
 }

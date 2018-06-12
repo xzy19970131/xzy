@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import com.oracle.TeaMall.bean.User;
+import com.oracle.TeaMall.util.MD5;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
+import com.oracle.TeaMall.util.*;
 
 
 public class UserDAOImp extends BaseDAOImp implements UserDAO {
@@ -63,18 +64,16 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 		PreparedStatement  preSta=null;
 		int result=0;
 		try {
-			  preSta=getPreSta("update user2 set userid=? ,nickname=?,sex=?,age=?,image=?,job=?,jialing=?,email=?,tel=?,jianjie=? where userid=?");
+			  preSta=getPreSta("update user2 set userid=? ,password=?,	username=? where userid=?");
+			  System.out.println("UserAaoImp中:"+userid);
 			  preSta.setInt(1, u.getUserid());
-			  preSta.setString(2, u.getNickname());
-			  preSta.setInt(3, u.getSex());;
-			  preSta.setInt(4, u.getAge());;
-			  preSta.setString(5, u.getImage());
-			  preSta.setString(6, u.getJob());
-			  preSta.setInt(7, u.getJialing());
-			  preSta.setString(8, u.getEmail());
-			  preSta.setString(9, u.getTel());
-			  preSta.setString(10, u.getJianjie());
-			  preSta.setInt(11, u.getUserid());
+			
+	
+			  MD5 m = new MD5();
+			  preSta.setString(2,m.MD5(u.getPassword()) );
+			  preSta.setString(3, u.getUsername());
+			  preSta.setInt(4, u.getUserid());
+		
 			  result=preSta.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,11 +90,7 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 		return preSta;
 	}
 
-	@Override
-	public Object list() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public User login(int userid, String password) {
@@ -184,6 +179,7 @@ public class UserDAOImp extends BaseDAOImp implements UserDAO {
 			while(rs.next()) {
 				User  user=new User();
 				user.setUserid(rs.getInt("userid"));
+				System.err.println("UserDaoImp中的userid："+rs.getInt("userid"));
 				user.setPassword(rs.getString("password"));
 				if(rs.getString("image")!=null)
 				{

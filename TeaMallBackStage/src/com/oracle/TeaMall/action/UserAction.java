@@ -31,12 +31,21 @@ public class UserAction  implements RequestAware{
 	private  User  u;
 	private int userid;
 	private String password;
+	private String username	;
 	private  UserDAO  dao;
 	private int page;
 	private int rows;
 	private int i;
 	
 	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public int getI() {
 		return i;
@@ -89,6 +98,7 @@ public class UserAction  implements RequestAware{
 
 	public UserAction() {
 		dao=new UserDAOImp();
+		u=new User();
 	}
 	/**
 	 * 添加用户
@@ -128,14 +138,19 @@ public class UserAction  implements RequestAware{
 	}
 	
 	
-	public String update() {
-		
-	
-		
+	public void update() throws IOException {
 		
 		System.out.println("进了update");
-		System.out.println(userid);
-	//	boolean  result=dao.update(o);
+		System.out.println("UserAction中"+userid+password+username);
+		u.setPassword(password);
+		u.setUserid(userid);
+		u.setUsername(username);
+		boolean  result=dao.update(u);
+	/*	HttpServletRequest request = ServletActionContext.getRequest();
+        HttpServletResponse response = ServletActionContext.getResponse();*/
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response=ServletActionContext.getResponse();
+		PrintWriter w =	response.getWriter();
 	/*	try {
 			  preSta=getPreSta("update user2 set userid=? ,nickname=?,sex=?,age=?,image=?,job=?,jialing=?,email=?,tel=?,jianjie=? where userid=?");
 			  preSta.setInt(1, u.getUserid());
@@ -153,7 +168,12 @@ public class UserAction  implements RequestAware{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}*/
-		return "s";
+		if(result) {
+			w.write("updateSuccess");
+		}else {
+			w.write("updateFail");
+		}
+	
 	}
 	/**
 	 * 分页加载用户资料
@@ -167,6 +187,7 @@ public class UserAction  implements RequestAware{
 				JSONObject  j=new JSONObject();
 				
 				j.put("userid", u.getUserid());
+				System.out.println("UserAction中：userid"+u.getUserid());
 				j.put("username", u.getUsername());
 				j.put("sex",(u.getSex()==0)?"男":"女");
 				j.put("age", u.getAge());

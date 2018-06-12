@@ -55,7 +55,7 @@ public abstract class BaseDAOImp implements BaseDAO{
 			try {
 				sta.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 		}
@@ -73,7 +73,7 @@ public abstract class BaseDAOImp implements BaseDAO{
 			try {
 				sta.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+		
 				e.printStackTrace();
 			}
 		}

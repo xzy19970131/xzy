@@ -31,8 +31,8 @@ public class User implements Serializable{
 	public int getUserid() {
 		return userid;
 	}
-	public int setUserid(int userid) {
-		return userid;
+	public void setUserid(int userid) {
+		this.userid=userid;
 	}
 
 	public String getPassword() {

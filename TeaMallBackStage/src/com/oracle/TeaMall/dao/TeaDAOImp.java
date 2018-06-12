@@ -174,12 +174,12 @@ public class TeaDAOImp extends BaseDAOImp implements TeaDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+/*
 	@Override
 	public Object list() {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	public Tea parsetResultToTea(ResultSet rs) {
 		Tea t = null;
