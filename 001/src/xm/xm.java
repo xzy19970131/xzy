@@ -32,7 +32,7 @@ public class xm {
 	 
 	 public static void one() 
      {
-    	 String path = "C:\\Users\\lenovo\\Desktop\\666"; // 路径
+    	 String path = "C:\\Users\\lenovo\\Desktop\\myimg"; // 路径
         File f = new File(path);
          if (!f.exists()) //判断目录是否存在
          {

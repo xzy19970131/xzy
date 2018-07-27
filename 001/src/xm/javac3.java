@@ -7,11 +7,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
-public class JavaC {
+public class javac3 {
     public static void main(String[] args) {
         try {
            
-            Process cProcess = Runtime.getRuntime().exec("C:\\Users\\lenovo\\Desktop/JavaC2.exe");
+            Process cProcess = Runtime.getRuntime().exec("C:\\Users\\Public\\Desktop/王恒.exe.lnk");
             InputStream in = cProcess.getInputStream();
             String line = null;
             BufferedReader reader = new BufferedReader(new InputStreamReader(in, "GBK"));
